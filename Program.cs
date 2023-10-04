@@ -1,45 +1,41 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
 using MongoDB_Code.Models;
 using MongoDB_Code.Services;
-using OSMongo.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-//Configure Startup
+// Ajustando a configuração de MyDatabaseSettings
+var myDatabaseSettings = builder.Configuration.GetSection(nameof(MyDatabaseSettings)).Get<MyDatabaseSettings>();
 
-public void ConfigureServices(IServiceCollection services)
+if (myDatabaseSettings == null)
 {
-    services.Configure<MyDatabaseSettings>(
-        Configuration.GetSection(nameof(MyDatabaseSettings)));
-
-    services.AddSingleton<MyDatabaseSettings>(sp =>
-        sp.GetRequiredService<IOptions<MyDatabaseSettings>>().Value);
-
-    services.AddSingleton<MongoDBService>();
-    ...
+    throw new InvalidOperationException("MyDatabaseSettings could not be configured.");
 }
 
-//Fim Startup
+builder.Services.AddSingleton(myDatabaseSettings);
+
 
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (!app.Environment.IsDevelopment())
+if (app.Environment.IsDevelopment())
+{
+    app.UseDeveloperExceptionPage();
+}
+else
 {
     app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
-
 app.UseRouting();
-
 app.UseAuthorization();
 
 app.MapControllerRoute(

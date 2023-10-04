@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "qdSw+OhHk5w/LJFzc5f1ulu625HVpQGd6CXMdC7e2ZeDz1HYdXIwEdxetqY8unq+u0Yhdl8+xzLEmyn0M8bE7w==",
+  "dgSpecHash": "PMkhHS5/aweD4iW0lHCfCAKHxqSDEYfJJvVvPfWbp4m3J0YTCiQdONBzMUF/UoGh8d4n/pl8xboe9xRePhS4Pg==",
   "success": true,
   "projectFilePath": "/Users/ielo/Library/Mobile Documents/com~apple~CloudDocs/Dev/Forge/MongoDB_Code/MongoDB_Code.csproj",
   "expectedPackageFiles": [
@@ -14,6 +14,8 @@
     "/Users/ielo/.nuget/packages/mongodb.driver/2.21.0/mongodb.driver.2.21.0.nupkg.sha512",
     "/Users/ielo/.nuget/packages/mongodb.driver.core/2.21.0/mongodb.driver.core.2.21.0.nupkg.sha512",
     "/Users/ielo/.nuget/packages/mongodb.libmongocrypt/1.8.0/mongodb.libmongocrypt.1.8.0.nupkg.sha512",
+    "/Users/ielo/.nuget/packages/newtonsoft.json/13.0.3/newtonsoft.json.13.0.3.nupkg.sha512",
+    "/Users/ielo/.nuget/packages/newtonsoft.json.bson/1.0.2/newtonsoft.json.bson.1.0.2.nupkg.sha512",
     "/Users/ielo/.nuget/packages/sharpcompress/0.30.1/sharpcompress.0.30.1.nupkg.sha512",
     "/Users/ielo/.nuget/packages/snappier/1.0.0/snappier.1.0.0.nupkg.sha512",
     "/Users/ielo/.nuget/packages/system.buffers/4.5.1/system.buffers.4.5.1.nupkg.sha512",

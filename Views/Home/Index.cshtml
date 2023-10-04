@@ -1,9 +1,21 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
+﻿@page
+@model MongoDB_Code.Models.IndexModel
+@using MongoDB.Bson
+@using MongoDB.Bson.IO
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
 
+
+<h2>Dados do MongoDB:</h2>
+<ul>
+    @if (Model.Documents != null && Model.Documents.Any())
+    {
+        foreach (var document in Model.Documents)
+        {
+            <li>@document.ToJson(new MongoDB.Bson.IO.JsonWriterSettings { Indent = true })</li>
+        }
+    }
+    else
+    {
+        <li>Nenhum documento encontrado.</li>
+    }
+</ul>
