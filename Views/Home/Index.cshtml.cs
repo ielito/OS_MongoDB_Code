@@ -18,10 +18,10 @@ namespace MongoDB_Code.Pages
 
         public List<BsonDocument> Documents { get; private set; } = new List<BsonDocument>();
 
-        public async Task OnGetAsync()
+        public async Task OnGetAsync(int? limit)
         {
             ViewData["Title"] = "Home Page";
-            Documents = await _mongoDBService.RetrieveDataAsync();
+            Documents = await _mongoDBService.RetrieveDataAsync(limit ?? 1);
         }
     }
 }

@@ -19,11 +19,13 @@ namespace MongoDB_Code.Services
             _collection = database.GetCollection<BsonDocument>(settings.CollectionName);
         }
 
-        public async Task<List<BsonDocument>> RetrieveDataAsync()
+        public async Task<List<BsonDocument>> RetrieveDataAsync(int limit = 1)
         {
             try
             {
-                return await _collection.Find(new BsonDocument()).ToListAsync();
+                var data = await _collection.Find(new BsonDocument()).ToListAsync();
+                Console.WriteLine($"Retrieved {data.Count} documents from MongoDB.");
+                return data;
             }
             catch (Exception ex)
             {

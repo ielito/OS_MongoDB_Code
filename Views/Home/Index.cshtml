@@ -1,21 +1,21 @@
-﻿@page
-@model MongoDB_Code.Models.IndexModel
+﻿@using MongoDB.Bson.IO
 @using MongoDB.Bson
-@using MongoDB.Bson.IO
+@model List<MongoDB.Bson.BsonDocument>
 
+@{
+    ViewData["Title"] = "Home Page";
+}
 
-
+<h1>@ViewData["Title"]</h1>
 <h2>Dados do MongoDB:</h2>
+
+<a href="@Url.Action("Index", "Home", new { limit = 5 })">Load 5 Documents</a>
+
 <ul>
-    @if (Model.Documents != null && Model.Documents.Any())
+    @foreach (var document in Model)
     {
-        foreach (var document in Model.Documents)
-        {
-            <li>@document.ToJson(new MongoDB.Bson.IO.JsonWriterSettings { Indent = true })</li>
-        }
-    }
-    else
-    {
-        <li>Nenhum documento encontrado.</li>
+        //<li>@document.ToJson(new JsonWriterSettings { Indent = true })</li>
+        @document.ToJson(new JsonWriterSettings { Indent = true })
+
     }
 </ul>

@@ -16,9 +16,9 @@ namespace MongoDB_Code.Models
             _mongoDBService = mongoDBService;
         }
 
-        public async Task OnGetAsync()
+        public async Task OnGetAsync(int? limit)
         {
-            Documents = await _mongoDBService.RetrieveDataAsync();
+            Documents = await _mongoDBService.RetrieveDataAsync(limit ?? 1);
         }
     }
 }
