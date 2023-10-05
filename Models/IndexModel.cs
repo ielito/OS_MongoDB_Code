@@ -6,19 +6,21 @@ using MongoDB_Code.Services;
 
 namespace MongoDB_Code.Models
 {
-    public class IndexModel : PageModel
+    public class IndexModel
     {
         private readonly MongoDBService _mongoDBService;
-        public IList<BsonDocument> Documents { get; private set; } = new List<BsonDocument>();
 
         public IndexModel(MongoDBService mongoDBService)
         {
             _mongoDBService = mongoDBService;
         }
 
-        public async Task OnGetAsync(int? limit)
+        public BsonDocument? Document { get; set; }
+
+        public async Task RetrieveDataAsync()
         {
-            Documents = await _mongoDBService.RetrieveDataAsync(limit ?? 1);
+            var documents = await _mongoDBService.RetrieveDataAsync();
+            Document = documents.FirstOrDefault();
         }
     }
 }

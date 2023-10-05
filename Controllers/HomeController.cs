@@ -19,11 +19,9 @@ namespace MongoDB_Code.Controllers
 
         public async Task<IActionResult> Index()
         {
-            // Buscar os dados do MongoDB
-            List<BsonDocument> documents = await _mongoDBService.RetrieveDataAsync();
-
-            // Passar os dados para a View
-            return View(documents);
+            var model = new IndexModel(_mongoDBService);
+            await model.RetrieveDataAsync();
+            return View(model);
         }
 
         public IActionResult Privacy()

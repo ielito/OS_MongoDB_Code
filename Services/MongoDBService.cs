@@ -34,6 +34,21 @@ namespace MongoDB_Code.Services
             }
         }
 
+        public async Task<BsonDocument> RetrieveDataAsync(ObjectId? lastId)
+        {
+            try
+            {
+                var filter = lastId == null ? new BsonDocument() : Builders<BsonDocument>.Filter.Gt("_id", lastId);
+                return await _collection.Find(filter).Limit(1).FirstOrDefaultAsync();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"An error occurred: {ex.Message}");
+                return null;
+            }
+        }
+
+
         private string GetDebuggerDisplay()
         {
             return ToString() ?? string.Empty;
