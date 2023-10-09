@@ -20,7 +20,7 @@ namespace MongoDB_Code.Controllers
         public async Task<IActionResult> Index()
         {
             var model = new IndexModel(_mongoDBService);
-            await model.RetrieveDataAsync();
+            await model.RetrieveDataAsync(null);
             return View(model);
         }
 

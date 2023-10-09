@@ -860,6 +860,7 @@
   },
   "projectFileDependencyGroups": {
     "net7.0": [
+      "MongoDB.Bson >= 2.21.0",
       "MongoDB.Driver >= 2.21.0",
       "Newtonsoft.Json >= 13.0.3",
       "Newtonsoft.Json.Bson >= 1.0.2"
@@ -904,6 +905,10 @@
       "net7.0": {
         "targetAlias": "net7.0",
         "dependencies": {
+          "MongoDB.Bson": {
+            "target": "Package",
+            "version": "[2.21.0, )"
+          },
           "MongoDB.Driver": {
             "target": "Package",
             "version": "[2.21.0, )"

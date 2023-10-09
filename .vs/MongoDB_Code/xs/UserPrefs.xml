@@ -3,15 +3,13 @@
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MonoDevelop.Ide.Workbench ActiveDocument="Program.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Services/MongoDBService.cs">
     <Files>
-      <File FileName="Views/Home/Index.cshtml" Line="24" Column="6" />
-      <File FileName="Views/Home/HomeController.cs" Line="23" Column="2" />
-      <File FileName="Models/IndexModel.cs" Line="12" Column="95" />
-      <File FileName="Models/MyDatabaseSettings.cs" Line="9" Column="2" />
-      <File FileName="Services/mongo_services.cs" Line="24" Column="16" />
-      <File FileName="appsettings.json" Line="10" Column="30" />
-      <File FileName="Program.cs" Line="13" Column="1" />
+      <File FileName="Services/MongoDBService.cs" Line="14" Column="1" />
+      <File FileName="Views/Home/Index.cshtml" Line="28" Column="1" />
+      <File FileName="appsettings.json" Line="5" Column="37" />
+      <File FileName="Models/IndexModel.cs" Line="27" Column="1" />
+      <File FileName="Controllers/HomeController.cs" Line="26" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -23,14 +21,16 @@
                 <Node name="PackageDependencies" expanded="True" />
               </Node>
               <Node name="Controllers" expanded="True" />
+              <Node name="Models" expanded="True" />
               <Node name="Properties" expanded="True" />
               <Node name="Services" expanded="True" />
-              <Node name="Views">
+              <Node name="Views" expanded="True">
                 <Node name="Home" expanded="True">
                   <Node name="Index.cshtml" expanded="True" />
                 </Node>
                 <Node name="Shared" expanded="True" />
               </Node>
+              <Node name="appsettings.json" expanded="True" />
             </Node>
           </Node>
         </State>

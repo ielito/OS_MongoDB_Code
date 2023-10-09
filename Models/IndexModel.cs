@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc;
 using MongoDB.Bson;
 using MongoDB_Code.Services;
 
@@ -15,12 +15,11 @@ namespace MongoDB_Code.Models
             _mongoDBService = mongoDBService;
         }
 
-        public BsonDocument? Document { get; set; }
+        public List<BsonDocument> Documents { get; private set; } = new List<BsonDocument>();
 
-        public async Task RetrieveDataAsync()
+        public async Task RetrieveDataAsync(int? limit)
         {
-            var documents = await _mongoDBService.RetrieveDataAsync();
-            Document = documents.FirstOrDefault();
+            Documents = await _mongoDBService.RetrieveDataAsync(limit ?? 1);
         }
     }
 }

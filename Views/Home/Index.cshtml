@@ -1,27 +1,19 @@
-﻿@page
-@model MongoDB_Code.Models.IndexModel
+﻿@model MongoDB_Code.Models.IndexModel
 @using MongoDB.Bson
 @{
     ViewData["Title"] = "Home Page";
 }
 
-<h1>@ViewData["Title"]</h1>
-
-@if (Model?.Document != null)
+@if (Model.Documents != null && Model.Documents.Any())
 {
-    <h2>Dados do MongoDB:</h2>
     <ul>
-        <li>ID: @Model.Document.GetValue("_id")</li>
-        <li>Username: @Model.Document.GetValue("username")</li>
-        <li>Name: @Model.Document.GetValue("name")</li>
-        <li>Address: @Model.Document.GetValue("address")</li>
-        <li>Birthdate: @Model.Document.GetValue("birthdate")</li>
-        <li>Email: @Model.Document.GetValue("email")</li>
-        <li>Active: @Model.Document.GetValue("active")</li>
-        <!-- Adicione mais campos conforme necessário -->
+        @foreach (var document in Model.Documents)
+        {
+            <li>@document.ToJson()</li>
+        }
     </ul>
 }
 else
 {
-    <p>Nenhum documento encontrado.</p>
+    <p>No documents found.</p>
 }

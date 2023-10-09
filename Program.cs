@@ -11,12 +11,7 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddSingleton<MongoDBService>();
 
 // Ajustando a configuração de MyDatabaseSettings
-var myDatabaseSettings = builder.Configuration.GetSection(nameof(MyDatabaseSettings)).Get<MyDatabaseSettings>();
-
-if (myDatabaseSettings == null)
-{
-    throw new InvalidOperationException("MyDatabaseSettings could not be configured.");
-}
+var myDatabaseSettings = builder.Configuration.GetSection(nameof(MyDatabaseSettings)).Get<MyDatabaseSettings>() ?? throw new InvalidOperationException("MyDatabaseSettings could not be configured.");
 
 builder.Services.AddSingleton(myDatabaseSettings);
 

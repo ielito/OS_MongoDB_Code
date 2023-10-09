@@ -34,7 +34,7 @@ namespace MongoDB_Code.Services
             }
         }
 
-        public async Task<BsonDocument> RetrieveDataAsync(ObjectId? lastId)
+        public async Task<BsonDocument?> RetrieveDataAsync(ObjectId? lastId)
         {
             try
             {
@@ -43,11 +43,10 @@ namespace MongoDB_Code.Services
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"An error occurred: {ex.Message}");
+                Console.WriteLine($"An error occurred: {ex.Message}\n{ex.StackTrace}");
                 return null;
             }
         }
-
 
         private string GetDebuggerDisplay()
         {

@@ -1,19 +1,18 @@
-﻿using Microsoft.AspNetCore.Mvc.RazorPages;
-using MongoDB_Code.Services;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 using MongoDB.Bson;
+using MongoDB_Code.Services;
 
 namespace MongoDB_Code.Pages
 {
     public class IndexModel : PageModel
     {
-        private readonly IHostEnvironment _env;
         private readonly MongoDBService _mongoDBService;
 
-        public IndexModel(MongoDBService mongoDBService, IHostEnvironment env)
+        public IndexModel(MongoDBService mongoDBService)
         {
             _mongoDBService = mongoDBService;
-            _env = env;
-
         }
 
         public List<BsonDocument> Documents { get; private set; } = new List<BsonDocument>();
