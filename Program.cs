@@ -8,6 +8,11 @@ var builder = WebApplication.CreateBuilder(args);
 // Adicione serviços ao container.
 builder.Services.AddControllersWithViews();
 
+builder.Services.AddSession(); // Adiciona o serviço de sessão
+builder.Services.AddControllersWithViews().AddSessionStateTempDataProvider();
+
+builder.Services.AddDistributedMemoryCache(); // Adicione este serviço se ainda não estiver adicionado
+
 // Configure MyDatabaseSettings usando o padrão IOptions
 builder.Services.Configure<MyDatabaseSettings>(
     builder.Configuration.GetSection(nameof(MyDatabaseSettings)));
@@ -32,6 +37,8 @@ else
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
+// Adiciona o middleware de sessão
+app.UseSession();
 app.UseRouting();
 app.UseAuthorization();
 

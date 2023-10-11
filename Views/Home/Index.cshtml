@@ -4,6 +4,16 @@
     ViewData["Title"] = "Home Page";
 }
 
+
+@{
+    if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success">
+            @TempData["SuccessMessage"]
+        </div>
+    }
+}
+
 @if (Model.Documents != null && Model.Documents.Any())
 {
     <ul>
@@ -17,3 +27,4 @@ else
 {
     <p>No documents found.</p>
 }
+

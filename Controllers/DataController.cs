@@ -17,7 +17,6 @@ namespace MongoDB_Code.Controllers
         {
             var mongoService = _mongoDBServiceProvider.CreateService();
             var data = await mongoService.RetrieveDataAsync();
-            // ... resto do código
             return View(data);
         }
     }

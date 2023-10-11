@@ -18,8 +18,11 @@
     <button type="submit" class="btn btn-primary">Save</button>
 </form>
 
-@if (!string.IsNullOrEmpty(Model.Message))
-{
-    <p>@Model.Message</p>
-    <a href="@Url.Action("Index", "Data")" class="btn btn-success">Go to Data Page</a>
+@{
+    if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success">
+            @TempData["SuccessMessage"]
+        </div>
+    }
 }

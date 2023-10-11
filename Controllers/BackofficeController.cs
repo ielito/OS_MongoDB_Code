@@ -10,38 +10,40 @@ namespace MongoDB_Code.Controllers
     public class BackofficeController : Controller
     {
         private readonly MongoDBServiceProvider _mongoDBServiceProvider;
+        private readonly ILogger<BackofficeController> _logger;
 
-        public BackofficeController(MongoDBServiceProvider mongoDBServiceProvider)
+        public BackofficeController(MongoDBServiceProvider mongoDBServiceProvider, ILogger<BackofficeController> logger)
         {
             _mongoDBServiceProvider = mongoDBServiceProvider;
+            _logger = logger; // Agora logger é passado como um argumento para o construtor
         }
 
         [HttpPost]
         public IActionResult Save(BackofficeModel model)
         {
-            if (ModelState.IsValid)
+            _logger.LogInformation("Save action called.");
+
+            if (!ModelState.IsValid)
             {
-                var newSettings = new MyDatabaseSettings
-                {
-                    ConnectionString = model.ConnectionString,
-                    DatabaseName = model.DatabaseName,
-                    CollectionName = model.CollectionName
-                };
-
-                _mongoDBServiceProvider.UpdateSettings(newSettings);
-
-                // Salvar as configurações no arquivo appsettings.json
-                SaveSettings(newSettings);
-
-                // Atualizar as configurações em memória e o serviço MongoDB
-                _mongoDBServiceProvider.UpdateSettings(newSettings);
-
-                TempData["SuccessMessage"] = "Configurações salvas com sucesso!";
-                return RedirectToAction("Index", "Home");
+                _logger.LogWarning("ModelState is not valid.");
+                return View("Index", model);
             }
 
-            return View("Index", model);
+            var newSettings = new MyDatabaseSettings
+            {
+                ConnectionString = model.ConnectionString,
+                DatabaseName = model.DatabaseName,
+                CollectionName = model.CollectionName
+            };
+
+            _mongoDBServiceProvider.UpdateSettings(newSettings);
+            SaveSettings(newSettings);
+
+            _logger.LogInformation("Settings saved. Setting TempData and redirecting...");
+            TempData["SuccessMessage"] = "Configurações salvas com sucesso!";
+            return RedirectToAction("Index", "Home");
         }
+
 
         private void SaveSettings(MyDatabaseSettings newSettings)
         {
