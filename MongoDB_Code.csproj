@@ -1,9 +1,10 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>62c67514-d37b-4737-8017-c5062e4548d3</UserSecretsId>
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(RunConfiguration)' == 'https' " />
@@ -16,8 +17,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Remove="Services\" />
+    <None Remove="Views\Backoffice\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Services\" />
+    <Folder Include="Views\Backoffice\" />
   </ItemGroup>
 </Project>

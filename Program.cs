@@ -1,24 +1,25 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
+﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using MongoDB_Code.Models;
 using MongoDB_Code.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+// Adicione serviços ao container.
 builder.Services.AddControllersWithViews();
-builder.Services.AddSingleton<MongoDBService>();
 
-// Ajustando a configuração de MyDatabaseSettings
-var myDatabaseSettings = builder.Configuration.GetSection(nameof(MyDatabaseSettings)).Get<MyDatabaseSettings>() ?? throw new InvalidOperationException("MyDatabaseSettings could not be configured.");
+// Configure MyDatabaseSettings usando o padrão IOptions
+builder.Services.Configure<MyDatabaseSettings>(
+    builder.Configuration.GetSection(nameof(MyDatabaseSettings)));
 
-builder.Services.AddSingleton(myDatabaseSettings);
+// Adicionando MongoDBServiceProvider e MongoDBService ao container de serviços
+//builder.Services.AddScoped<MongoDBServiceProvider>();
+builder.Services.AddSingleton<MongoDBServiceProvider>();
 
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+// Configure o pipeline de solicitação HTTP.
 if (app.Environment.IsDevelopment())
 {
     app.UseDeveloperExceptionPage();
@@ -36,7 +37,6 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Backoffice}/{action=Index}/{id?}");
 
 app.Run();
-

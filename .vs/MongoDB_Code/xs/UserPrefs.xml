@@ -3,34 +3,28 @@
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MonoDevelop.Ide.Workbench ActiveDocument="Services/MongoDBService.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="appsettings.json">
     <Files>
-      <File FileName="Services/MongoDBService.cs" Line="14" Column="1" />
-      <File FileName="Views/Home/Index.cshtml" Line="28" Column="1" />
-      <File FileName="appsettings.json" Line="5" Column="37" />
-      <File FileName="Models/IndexModel.cs" Line="27" Column="1" />
-      <File FileName="Controllers/HomeController.cs" Line="26" Column="1" />
+      <File FileName="Program.cs" Line="22" Column="4" />
+      <File FileName="Controllers/BackofficeController.cs" Line="31" Column="42" />
+      <File FileName="Services/MongoDBService.cs" Line="22" Column="68" />
+      <File FileName="Services/MongoDBServiceProvider.cs" Line="38" Column="68" />
+      <File FileName="appsettings.json" Line="15" Column="2" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
-          <Node name="MongoDB_Code">
-            <Node name="MongoDB_Code" selected="True">
-              <Node name="Dependencies" expanded="True">
-                <Node name="FrameworkReferences" expanded="True" />
-                <Node name="PackageDependencies" expanded="True" />
-              </Node>
-              <Node name="Controllers" expanded="True" />
-              <Node name="Models" expanded="True" />
+          <Node name="MongoDB_Code" expanded="True">
+            <Node name="MongoDB_Code">
               <Node name="Properties" expanded="True" />
-              <Node name="Services" expanded="True" />
               <Node name="Views" expanded="True">
+                <Node name="Backoffice" expanded="True" />
                 <Node name="Home" expanded="True">
                   <Node name="Index.cshtml" expanded="True" />
                 </Node>
                 <Node name="Shared" expanded="True" />
               </Node>
-              <Node name="appsettings.json" expanded="True" />
+              <Node name="appsettings.json" selected="True" />
             </Node>
           </Node>
         </State>

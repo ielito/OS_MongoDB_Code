@@ -10,17 +10,18 @@ namespace MongoDB_Code.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly MongoDBService _mongoDBService;
+        private readonly MongoDBServiceProvider _mongoDBServiceProvider;
 
-        public HomeController(MongoDBService mongoDBService)
+        public HomeController(MongoDBServiceProvider mongoDBServiceProvider)
         {
-            _mongoDBService = mongoDBService;
+            _mongoDBServiceProvider = mongoDBServiceProvider;
         }
 
         public async Task<IActionResult> Index()
         {
-            var model = new IndexModel(_mongoDBService);
-            await model.RetrieveDataAsync(null);
+            var mongoDBService = _mongoDBServiceProvider.CreateService();
+            var model = new IndexModel(mongoDBService);
+            await model.RetrieveDataAsync(10);
             return View(model);
         }
 

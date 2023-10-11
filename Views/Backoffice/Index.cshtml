@@ -1,0 +1,25 @@
+﻿@model MongoDB_Code.Models.BackofficeModel
+
+<h2>Backoffice Configuration</h2>
+
+<form method="post" action="@Url.Action("Save", "Backoffice")">
+    <div class="form-group">
+        <label for="ConnectionString">Connection String:</label>
+        <input type="text" class="form-control" id="ConnectionString" name="ConnectionString" value="@Model.ConnectionString" required />
+    </div>
+    <div class="form-group">
+        <label for="DatabaseName">Database Name:</label>
+        <input type="text" class="form-control" id="DatabaseName" name="DatabaseName" value="@Model.DatabaseName" required />
+    </div>
+    <div class="form-group">
+        <label for="CollectionName">Collection Name:</label>
+        <input type="text" class="form-control" id="CollectionName" name="CollectionName" value="@Model.CollectionName" required />
+    </div>
+    <button type="submit" class="btn btn-primary">Save</button>
+</form>
+
+@if (!string.IsNullOrEmpty(Model.Message))
+{
+    <p>@Model.Message</p>
+    <a href="@Url.Action("Index", "Data")" class="btn btn-success">Go to Data Page</a>
+}
