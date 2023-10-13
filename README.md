@@ -59,7 +59,3 @@ The MongoDB Connector is intended to be utilized as an asset in the OutSystems F
 ## Support and Contribution
 
 Feel free to contribute to the development of the MongoDB Connector by providing feedback, reporting bugs, or suggesting improvements. Your contributions are valuable in enhancing the connector and providing a useful tool for the ODC community.
-
----
-
-This README provides a general overview and usage guide for the MongoDB Connector. Adjustments and additional details can be added as per the project's evolution and any additional features that may be implemented. Let's proceed to the next step when you're ready!
