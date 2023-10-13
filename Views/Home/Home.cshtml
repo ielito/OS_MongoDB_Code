@@ -1,0 +1,14 @@
+﻿@{
+    ViewData["Title"] = "Home";
+}
+
+<h1>Welcome to the Application</h1>
+<p>This is the home page of your application.</p>
+
+@if (string.IsNullOrEmpty((string)ViewBag.ConnectionString))
+{
+    <p>
+        It looks like the application needs to be configured.
+        <a href="@Url.Action("Index", "Backoffice")">Go to Configuration Page</a>
+    </p>
+}

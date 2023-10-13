@@ -53,6 +53,8 @@ namespace MongoDB_Code.Services
         public void UpdateSettings(MyDatabaseSettings newSettings)
         {
             _settings = newSettings;
+            // Atualizando o MongoDBService com as novas configurações
+            _mongoDBService = new MongoDBService(_settings, _logger);
         }
 
         public MongoDBService CreateService()

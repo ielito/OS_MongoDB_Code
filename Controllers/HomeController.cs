@@ -46,12 +46,17 @@ namespace MongoDB_Code.Controllers
             return View();
         }
 
+        public IActionResult Home()
+        {
+            // Lógica para a nova página Home, se necessário.
+            return View();
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
             _logger.LogWarning("Entering Error view in HomeController."); // Log de aviso
 
-            // Verificar se a string de conexão está vazia ou nula
             var settings = _mongoDBServiceProvider.GetCurrentSettings();
             if (string.IsNullOrEmpty(settings.ConnectionString))
             {

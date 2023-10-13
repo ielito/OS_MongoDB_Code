@@ -33,22 +33,9 @@ namespace MongoDB_Code.Controllers
 
             if (ModelState.IsValid)
             {
-                string encryptionKey = model.EncryptionKey;
-
-                if (string.IsNullOrEmpty(model.EncryptionKey))
-                {
-                    _logger.LogWarning("Encryption key is empty in BackofficeController Save method."); // Log de aviso
-                    ModelState.AddModelError(string.Empty, "Encryption key is required.");
-                    return View("Index", model);
-                }
-
-                HttpContext.Session.SetString("EncryptionKey", model.EncryptionKey);
-
-                var encryptedConnectionString = CryptoService.EncryptString(model.ConnectionString, model.EncryptionKey);
-
                 var newSettings = new MyDatabaseSettings
                 {
-                    ConnectionString = encryptedConnectionString,
+                    ConnectionString = model.ConnectionString, // Usar a string de conexão do modelo
                     DatabaseName = model.DatabaseName,
                     CollectionName = model.CollectionName
                 };
@@ -85,23 +72,20 @@ namespace MongoDB_Code.Controllers
 
         public IActionResult Index()
         {
-            _logger.LogInformation("Entering Index method in BackofficeController."); // Log de informação
+            _logger.LogInformation("Entering Index method in BackofficeController.");
 
             var settings = _mongoDBServiceProvider.GetCurrentSettings();
 
             if (string.IsNullOrEmpty(settings.ConnectionString))
             {
-                _logger.LogWarning("Connection string is empty in BackofficeController Index method."); // Log de aviso
+                _logger.LogWarning("Connection string is empty in BackofficeController Index method.");
                 ViewBag.ErrorMessage = "A string de conexão está vazia. Por favor, configure-a antes de prosseguir.";
-                return View("Error");
+                return View("Index");
             }
-
-            string encryptionKey = HttpContext.Session.GetString("EncryptionKey");
-            var decryptedConnectionString = CryptoService.DecryptString(settings.ConnectionString, encryptionKey);
 
             var model = new BackofficeModel
             {
-                ConnectionString = decryptedConnectionString,
+                ConnectionString = settings.ConnectionString,
                 DatabaseName = settings.DatabaseName,
                 CollectionName = settings.CollectionName
             };
