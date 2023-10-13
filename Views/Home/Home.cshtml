@@ -1,10 +1,16 @@
-﻿@{
+﻿@model MongoDB_Code.Models.BackofficeModel
+
+@{
     ViewData["Title"] = "Home";
 }
 
-<h1>Welcome to the Application</h1>
-<p>This is the home page of your application.</p>
+<h1>Welcome to the MongoDB Configuration Application</h1>
+<p>This application is designed to provide a simple and user-friendly interface for configuring and managing MongoDB connections. It allows users to input their MongoDB credentials and other settings, which are then stored and used to interact with the MongoDB instance.</p>
 
+<h2>How to Use</h2>
+
+<h3>Home Page</h3>
+<p>Upon launching the application, you'll be greeted with the Home Page.</p>
 @if (string.IsNullOrEmpty((string)ViewBag.ConnectionString))
 {
     <p>
@@ -12,3 +18,50 @@
         <a href="@Url.Action("Index", "Backoffice")">Go to Configuration Page</a>
     </p>
 }
+
+<p>If the application is not configured yet, you'll see a message prompting you to go to the configuration page.</p>
+<pre>
+&lt;p&gt;
+    It looks like the application needs to be configured.
+    &lt;a href="@Url.Action("Index", "Backoffice")"&gt;Go to Configuration Page&lt;/a&gt;
+&lt;/p&gt;
+</pre>
+
+<h3>Configuration Page</h3>
+<p>Navigate to the Configuration Page by clicking on the provided link. Here, you'll be able to input your MongoDB credentials and settings:</p>
+<ul>
+    <li><strong>Connection String:</strong> The MongoDB connection string.</li>
+    <li><strong>Database Name:</strong> The name of your MongoDB database.</li>
+    <li><strong>Collection Name:</strong> The name of the collection you wish to interact with.</li>
+</ul>
+
+<p>Ensure all fields are filled out and click "Save" to store the settings. The application will utilize these settings to interact with your MongoDB instance.</p>
+<pre>
+&lt;form method="post" action="@Url.Action("Save", "Backoffice")"&gt;
+    &lt;div class="form-group"&gt;
+        &lt;label for="ConnectionString"&gt;Connection String:&lt;/label&gt;
+        &lt;input type="text" class="form-control" id="ConnectionString" name="ConnectionString" required /&gt;
+    &lt;/div&gt;
+    &lt;div class="form-group"&gt;
+        &lt;label for="DatabaseName"&gt;Database Name:&lt;/label&gt;
+        &lt;input type="text" class="form-control" id="DatabaseName" name="DatabaseName" required /&gt;
+    &lt;/div&gt;
+    &lt;div class="form-group"&gt;
+        &lt;label for="CollectionName"&gt;Collection Name:&lt;/label&gt;
+        &lt;input type="text" class="form-control" id="CollectionName" name="CollectionName" required /&gt;
+    &lt;/div&gt;
+    &lt;button type="submit" class="btn btn-primary"&gt;Save&lt;/button&gt;
+&lt;/form&gt;
+</pre>
+
+<h3>Data Interaction</h3>
+<p>Once configured, the application will interact with the specified MongoDB collection, allowing for data retrieval and management based on the provided settings.</p>
+
+<h3>Security Note</h3>
+<p>While the current version of the application does not utilize encryption for the connection string, future versions aim to enhance security by encrypting sensitive data.</p>
+
+<h3>Need to Reconfigure?</h3>
+<p>You can navigate back to the Configuration Page anytime to update the MongoDB settings as per your requirements.</p>
+
+<h3>Further Assistance</h3>
+<p>For additional help or to report issues, please visit the <a href="https://github.com/ielito/OS_MongoDB_Code/issues" target="_blank">GitHub repository</a> and create an issue or contribute to the project.</p>

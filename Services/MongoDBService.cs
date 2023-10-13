@@ -1,14 +1,10 @@
-﻿    using MongoDB.Bson;
-    using MongoDB.Driver;
-    using MongoDB_Code.Models;
-    using System;
-    using System.Collections.Generic;
-    using System.Threading.Tasks;
-    using Microsoft.Extensions.Logging;
+﻿using MongoDB.Bson;
+using MongoDB.Driver;
+using MongoDB_Code.Models;
 
-    namespace MongoDB_Code.Services
-    {
-        public class MongoDBService
+namespace MongoDB_Code.Services
+{
+    public class MongoDBService
         {
             private MyDatabaseSettings _settings;
             private readonly ILogger<MongoDBService> _logger;
@@ -24,7 +20,6 @@
                 if (string.IsNullOrEmpty(settings.ConnectionString))
                 {
                     _logger.LogError("Connection string is empty. MongoDB client is not initialized.");
-                    // Não lançar uma exceção aqui, apenas retornar
                     return;
                 }
 
@@ -35,7 +30,6 @@
                 _logger = logger ?? throw new ArgumentNullException(nameof(logger));
 
                 var client = new MongoClient(_settings.ConnectionString);
-                // Restante do código do construtor
                 _mongoClient = new MongoClient(settings.ConnectionString);
                 var database = _mongoClient.GetDatabase(_settings.DatabaseName);
                 _collection = database.GetCollection<BsonDocument>(_settings.CollectionName);
@@ -45,10 +39,8 @@
 
             public void UpdateConfiguration(MyDatabaseSettings settings)
             {
-                // Atualizando as configurações internas
                  _settings = settings;
 
-                // Reconfigurando o cliente e a coleção do MongoDB
                 var client = new MongoClient(_settings.ConnectionString);
                 var database = client.GetDatabase(_settings.DatabaseName);
                 _collection = database.GetCollection<BsonDocument>(_settings.CollectionName);

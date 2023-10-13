@@ -1,12 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
-using MongoDB.Bson.IO;
 using MongoDB_Code.Models;
 using MongoDB_Code.Services;
-using Newtonsoft.Json;
 using JsonConvert = Newtonsoft.Json.JsonConvert;
-using MongoDB.Driver;
-using Microsoft.Extensions.Logging; // Adicione esta linha para usar logging
 
 namespace MongoDB_Code.Controllers
 {
@@ -29,13 +24,13 @@ namespace MongoDB_Code.Controllers
         [HttpPost]
         public IActionResult Save(BackofficeModel model)
         {
-            _logger.LogInformation("Entering Save method in BackofficeController."); // Log de informação
+            _logger.LogInformation("Entering Save method in BackofficeController.");
 
             if (ModelState.IsValid)
             {
                 var newSettings = new MyDatabaseSettings
                 {
-                    ConnectionString = model.ConnectionString, // Usar a string de conexão do modelo
+                    ConnectionString = model.ConnectionString,
                     DatabaseName = model.DatabaseName,
                     CollectionName = model.CollectionName
                 };
@@ -48,13 +43,13 @@ namespace MongoDB_Code.Controllers
                 return RedirectToAction("Index", "Home");
             }
 
-            _logger.LogWarning("Model state is invalid in BackofficeController Save method."); // Log de aviso
+            _logger.LogWarning("Model state is invalid in BackofficeController Save method.");
             return View("Index", model);
         }
 
         private void SaveSettings(MyDatabaseSettings newSettings)
         {
-            _logger.LogInformation("Entering SaveSettings method in BackofficeController."); // Log de informação
+            _logger.LogInformation("Entering SaveSettings method in BackofficeController.");
 
             string filePath = "appsettings.json";
             var json = System.IO.File.ReadAllText(filePath);
@@ -67,7 +62,7 @@ namespace MongoDB_Code.Controllers
             string output = Newtonsoft.Json.JsonConvert.SerializeObject(jsonObj, Newtonsoft.Json.Formatting.Indented);
             System.IO.File.WriteAllText(filePath, output);
 
-            _logger.LogInformation("Settings saved successfully in BackofficeController SaveSettings method."); // Log de informação
+            _logger.LogInformation("Settings saved successfully in BackofficeController SaveSettings method.");
         }
 
         public IActionResult Index()

@@ -1,11 +1,8 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Options;
-using MongoDB_Code.Models;
+﻿using MongoDB_Code.Models;
 using MongoDB_Code.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Adicione serviços ao container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddSingleton<CryptoService>();
 builder.Services.AddSession();
@@ -13,9 +10,8 @@ builder.Services.AddControllersWithViews().AddSessionStateTempDataProvider();
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddSingleton<MongoDBServiceProvider>();
 builder.Services.AddHttpContextAccessor();
-builder.Services.AddDistributedMemoryCache(); // Adicione este serviço se ainda não estiver adicionado
+builder.Services.AddDistributedMemoryCache();
 
-// Configure MyDatabaseSettings usando o padrão IOptions
 builder.Services.Configure<MyDatabaseSettings>(
     builder.Configuration.GetSection(nameof(MyDatabaseSettings)));
 

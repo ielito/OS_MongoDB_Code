@@ -9,11 +9,11 @@
     </div>
     <div class="form-group">
         <label for="DatabaseName">Database Name:</label>
-        <input type="text" class="form-control" id="DatabaseName" name="DatabaseName" value="@Model.DatabaseName" required />
+        <input type="text" class="form-control" id="DatabaseName" name="DatabaseName" value="@(Model?.DatabaseName ?? string.Empty)" required />
     </div>
     <div class="form-group">
         <label for="CollectionName">Collection Name:</label>
-        <input type="text" class="form-control" id="CollectionName" name="CollectionName" value="@Model.CollectionName" required />
+        <input type="text" class="form-control" id="CollectionName" name="CollectionName" value="@(Model?.CollectionName ?? string.Empty)" required /> required />
     </div>
     @*<div class="form-group">
             <label for="EncryptionKey">Encryption Key:</label>

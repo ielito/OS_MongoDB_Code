@@ -1,11 +1,6 @@
 ﻿using Microsoft.Extensions.Options;
 using MongoDB_Code.Models;
-using Microsoft.Extensions.Logging;
-using MongoDB.Bson.IO;
-using Newtonsoft.Json;
-using JsonConvert = Newtonsoft.Json.JsonConvert;
 using MongoDB.Driver;
-using Microsoft.AspNetCore.Http;
 
 
 namespace MongoDB_Code.Services
@@ -53,7 +48,6 @@ namespace MongoDB_Code.Services
         public void UpdateSettings(MyDatabaseSettings newSettings)
         {
             _settings = newSettings;
-            // Atualizando o MongoDBService com as novas configurações
             _mongoDBService = new MongoDBService(_settings, _logger);
         }
 
@@ -66,13 +60,10 @@ namespace MongoDB_Code.Services
         {
             _logger.LogInformation("Using connection string: {ConnectionString}", _settings.ConnectionString);
 
-            // Recuperar a chave de criptografia da sessão do usuário
             var encryptionKey = _httpContextAccessor.HttpContext.Session.GetString("EncryptionKey");
 
-            // Verificar se a string de conexão está vazia
             if (!string.IsNullOrEmpty(_settings.ConnectionString))
             {
-                // Verificar se a string de conexão está em formato Base64 (potencialmente criptografada)
                 if (CryptoService.IsBase64String(_settings.ConnectionString))
                 {
                     _logger.LogInformation("Decrypting connection string.");

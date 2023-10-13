@@ -1,12 +1,10 @@
-﻿    using System;
-    using System.IO;
-    using System.Security.Cryptography;
-    using System.Text;
-    using System.Text.RegularExpressions;
+﻿using System.Security.Cryptography;
+using System.Text;
+using System.Text.RegularExpressions;
 
-    namespace MongoDB_Code.Services
-    {
-        public class CryptoService
+namespace MongoDB_Code.Services
+{
+    public class CryptoService
         {
             public static bool IsBase64String(string s)
             {
@@ -61,7 +59,7 @@
 
                     var fullCipher = Convert.FromBase64String(cipherText);
 
-                    if (fullCipher.Length <= 16) // Verificando se há espaço suficiente para o IV
+                    if (fullCipher.Length <= 16)
                     {
                         throw new ArgumentException("The cipherText does not contain enough data to extract the IV.");
                     }
