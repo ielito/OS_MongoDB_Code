@@ -2,18 +2,17 @@
 using MongoDB_Code.Models;
 using MongoDB.Driver;
 
-
 namespace MongoDB_Code.Services
 {
     public class MongoDBServiceProvider
     {
-        private MyDatabaseSettings _settings;
+        private MyDatabaseSettings? _settings;
         private readonly ILogger<MongoDBService> _logger;
-        private MongoDBService _mongoDBService;
+        private MongoDBService? _mongoDBService;
         private readonly CryptoService _cryptoService;
-        private readonly IHttpContextAccessor _httpContextAccessor;
-        private readonly MongoClient _mongoClient;
-        private readonly IMongoDatabase _database;
+        private readonly IHttpContextAccessor? _httpContextAccessor;
+        private readonly MongoClient? _mongoClient;
+        private readonly IMongoDatabase? _database;
 
         public MongoDBServiceProvider(IOptions<MyDatabaseSettings> settings, ILogger<MongoDBService> logger, CryptoService cryptoService, IHttpContextAccessor httpContextAccessor)
         {
@@ -51,12 +50,12 @@ namespace MongoDB_Code.Services
             _mongoDBService = new MongoDBService(_settings, _logger);
         }
 
-        public MongoDBService CreateService()
+        public MongoDBService? CreateService()
         {
             return _mongoDBService;
         }
 
-        public MyDatabaseSettings GetCurrentSettings()
+        public MyDatabaseSettings? GetCurrentSettings()
         {
             _logger.LogInformation("Using connection string: {ConnectionString}", _settings.ConnectionString);
 

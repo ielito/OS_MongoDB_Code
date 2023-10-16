@@ -1,0 +1,18 @@
+﻿<?xml version="1.0"?>
+<package>
+  <metadata>
+    <id>MongoDBConnector</id>
+    <version>1.0.0</version>
+    <title>MongoDB Connector</title>
+    <authors>Ielito</authors>
+    <owners>LatamSA</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Uma biblioteca para facilitar a conexão e manipulação de dados no MongoDB.</description>
+    <releaseNotes>Primeira versão da biblioteca.</releaseNotes>
+    <copyright>Copyright © 2023 ielito</copyright>
+    <tags>MongoDB Connector Database</tags>
+  </metadata>
+  <files>
+    <file src="bin/Release/net7.0/MongoDB_Code.dll" target="lib/net7.0" />
+  </files>
+</package>

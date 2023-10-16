@@ -1,0 +1,106 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata>
+    <id>MongoDB_Code</id>
+    <version>1.0.0</version>
+    <authors>MongoDB_Code</authors>
+    <description>Package Description</description>
+    <dependencies>
+      <group targetFramework="net6.0">
+        <dependency id="MongoDB.Bson" version="2.22.0" exclude="Build,Analyzers" />
+        <dependency id="MongoDB.Driver" version="2.22.0" exclude="Build,Analyzers" />
+        <dependency id="Newtonsoft.Json" version="13.0.3" exclude="Build,Analyzers" />
+        <dependency id="Newtonsoft.Json.Bson" version="1.0.2" exclude="Build,Analyzers" />
+        <dependency id="OutSystems.ExternalLibraries.SDK" version="1.4.0" exclude="Build,Analyzers" />
+      </group>
+    </dependencies>
+    <frameworkReferences>
+      <group targetFramework="net6.0">
+        <frameworkReference name="Microsoft.AspNetCore.App" />
+      </group>
+    </frameworkReferences>
+    <contentFiles>
+      <files include="any/net6.0/appsettings.Development.json" buildAction="Content" />
+      <files include="any/net6.0/appsettings.json" buildAction="Content" />
+      <files include="any/net6.0/MyLibrary/obj/MyLibrary.csproj.nuget.dgspec.json" buildAction="Content" />
+      <files include="any/net6.0/MyLibrary/obj/project.assets.json" buildAction="Content" />
+    </contentFiles>
+  </metadata>
+  <files>
+    <file src="/Users/ielo/Library/Mobile Documents/com~apple~CloudDocs/Dev/Forge/MongoDB_Code/bin/Release/net6.0/MongoDB_Code.runtimeconfig.json" target="lib/net6.0/MongoDB_Code.runtimeconfig.json" />
+    <file src="/Users/ielo/Library/Mobile Documents/com~apple~CloudDocs/Dev/Forge/MongoDB_Code/bin/Release/net6.0/MongoDB_Code.dll" target="lib/net6.0/MongoDB_Code.dll" />
+    <file src="/Users/ielo/Library/Mobile Documents/com~apple~CloudDocs/Dev/Forge/MongoDB_Code/appsettings.Development.json" target="content/appsettings.Development.json" />
+    <file src="/Users/ielo/Library/Mobile Documents/com~apple~CloudDocs/Dev/Forge/MongoDB_Code/appsettings.Development.json" target="contentFiles/any/net6.0/appsettings.Development.json" />
+    <file src="/Users/ielo/Library/Mobile Documents/com~apple~CloudDocs/Dev/Forge/MongoDB_Code/appsettings.json" target="content/appsettings.json" />
+    <file src="/Users/ielo/Library/Mobile Documents/com~apple~CloudDocs/Dev/Forge/MongoDB_Code/appsettings.json" target="contentFiles/any/net6.0/appsettings.json" />
+    <file src="/Users/ielo/Library/Mobile Documents/com~apple~CloudDocs/Dev/Forge/MongoDB_Code/MyLibrary/obj/MyLibrary.csproj.nuget.dgspec.json" target="content/MyLibrary/obj/MyLibrary.csproj.nuget.dgspec.json" />
+    <file src="/Users/ielo/Library/Mobile Documents/com~apple~CloudDocs/Dev/Forge/MongoDB_Code/MyLibrary/obj/MyLibrary.csproj.nuget.dgspec.json" target="contentFiles/any/net6.0/MyLibrary/obj/MyLibrary.csproj.nuget.dgspec.json" />
+    <file src="/Users/ielo/Library/Mobile Documents/com~apple~CloudDocs/Dev/Forge/MongoDB_Code/MyLibrary/obj/project.assets.json" target="content/MyLibrary/obj/project.assets.json" />
+    <file src="/Users/ielo/Library/Mobile Documents/com~apple~CloudDocs/Dev/Forge/MongoDB_Code/MyLibrary/obj/project.assets.json" target="contentFiles/any/net6.0/MyLibrary/obj/project.assets.json" />
+    <file src="/Users/ielo/Library/Mobile Documents/com~apple~CloudDocs/Dev/Forge/MongoDB_Code/obj/Release/net6.0/scopedcss/projectbundle/MongoDB_Code.bundle.scp.css" target="staticwebassets/MongoDB_Code.bundle.scp.css" />
+    <file src="/Users/ielo/Library/Mobile Documents/com~apple~CloudDocs/Dev/Forge/MongoDB_Code/wwwroot/css/site.css" target="staticwebassets/css/site.css" />
+    <file src="/Users/ielo/Library/Mobile Documents/com~apple~CloudDocs/Dev/Forge/MongoDB_Code/wwwroot/favicon.ico" target="staticwebassets/favicon.ico" />
+    <file src="/Users/ielo/Library/Mobile Documents/com~apple~CloudDocs/Dev/Forge/MongoDB_Code/wwwroot/js/site.js" target="staticwebassets/js/site.js" />
+    <file src="/Users/ielo/Library/Mobile Documents/com~apple~CloudDocs/Dev/Forge/MongoDB_Code/wwwroot/lib/bootstrap/LICENSE" target="staticwebassets/lib/bootstrap/LICENSE" />
+    <file src="/Users/ielo/Library/Mobile Documents/com~apple~CloudDocs/Dev/Forge/MongoDB_Code/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.css" target="staticwebassets/lib/bootstrap/dist/css/bootstrap-grid.css" />
+    <file src="/Users/ielo/Library/Mobile Documents/com~apple~CloudDocs/Dev/Forge/MongoDB_Code/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.css.map" target="staticwebassets/lib/bootstrap/dist/css/bootstrap-grid.css.map" />
+    <file src="/Users/ielo/Library/Mobile Documents/com~apple~CloudDocs/Dev/Forge/MongoDB_Code/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.min.css" target="staticwebassets/lib/bootstrap/dist/css/bootstrap-grid.min.css" />
+    <file src="/Users/ielo/Library/Mobile Documents/com~apple~CloudDocs/Dev/Forge/MongoDB_Code/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.min.css.map" target="staticwebassets/lib/bootstrap/dist/css/bootstrap-grid.min.css.map" />
+    <file src="/Users/ielo/Library/Mobile Documents/com~apple~CloudDocs/Dev/Forge/MongoDB_Code/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.rtl.css" target="staticwebassets/lib/bootstrap/dist/css/bootstrap-grid.rtl.css" />
+    <file src="/Users/ielo/Library/Mobile Documents/com~apple~CloudDocs/Dev/Forge/MongoDB_Code/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.rtl.css.map" target="staticwebassets/lib/bootstrap/dist/css/bootstrap-grid.rtl.css.map" />
+    <file src="/Users/ielo/Library/Mobile Documents/com~apple~CloudDocs/Dev/Forge/MongoDB_Code/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.rtl.min.css" target="staticwebassets/lib/bootstrap/dist/css/bootstrap-grid.rtl.min.css" />
+    <file src="/Users/ielo/Library/Mobile Documents/com~apple~CloudDocs/Dev/Forge/MongoDB_Code/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.rtl.min.css.map" target="staticwebassets/lib/bootstrap/dist/css/bootstrap-grid.rtl.min.css.map" />
+    <file src="/Users/ielo/Library/Mobile Documents/com~apple~CloudDocs/Dev/Forge/MongoDB_Code/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.css" target="staticwebassets/lib/bootstrap/dist/css/bootstrap-reboot.css" />
+    <file src="/Users/ielo/Library/Mobile Documents/com~apple~CloudDocs/Dev/Forge/MongoDB_Code/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.css.map" target="staticwebassets/lib/bootstrap/dist/css/bootstrap-reboot.css.map" />
+    <file src="/Users/ielo/Library/Mobile Documents/com~apple~CloudDocs/Dev/Forge/MongoDB_Code/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.min.css" target="staticwebassets/lib/bootstrap/dist/css/bootstrap-reboot.min.css" />
+    <file src="/Users/ielo/Library/Mobile Documents/com~apple~CloudDocs/Dev/Forge/MongoDB_Code/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.min.css.map" target="staticwebassets/lib/bootstrap/dist/css/bootstrap-reboot.min.css.map" />
+    <file src="/Users/ielo/Library/Mobile Documents/com~apple~CloudDocs/Dev/Forge/MongoDB_Code/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.rtl.css" target="staticwebassets/lib/bootstrap/dist/css/bootstrap-reboot.rtl.css" />
+    <file src="/Users/ielo/Library/Mobile Documents/com~apple~CloudDocs/Dev/Forge/MongoDB_Code/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.rtl.css.map" target="staticwebassets/lib/bootstrap/dist/css/bootstrap-reboot.rtl.css.map" />
+    <file src="/Users/ielo/Library/Mobile Documents/com~apple~CloudDocs/Dev/Forge/MongoDB_Code/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.rtl.min.css" target="staticwebassets/lib/bootstrap/dist/css/bootstrap-reboot.rtl.min.css" />
+    <file src="/Users/ielo/Library/Mobile Documents/com~apple~CloudDocs/Dev/Forge/MongoDB_Code/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.rtl.min.css.map" target="staticwebassets/lib/bootstrap/dist/css/bootstrap-reboot.rtl.min.css.map" />
+    <file src="/Users/ielo/Library/Mobile Documents/com~apple~CloudDocs/Dev/Forge/MongoDB_Code/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.css" target="staticwebassets/lib/bootstrap/dist/css/bootstrap-utilities.css" />
+    <file src="/Users/ielo/Library/Mobile Documents/com~apple~CloudDocs/Dev/Forge/MongoDB_Code/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.css.map" target="staticwebassets/lib/bootstrap/dist/css/bootstrap-utilities.css.map" />
+    <file src="/Users/ielo/Library/Mobile Documents/com~apple~CloudDocs/Dev/Forge/MongoDB_Code/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.min.css" target="staticwebassets/lib/bootstrap/dist/css/bootstrap-utilities.min.css" />
+    <file src="/Users/ielo/Library/Mobile Documents/com~apple~CloudDocs/Dev/Forge/MongoDB_Code/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.min.css.map" target="staticwebassets/lib/bootstrap/dist/css/bootstrap-utilities.min.css.map" />
+    <file src="/Users/ielo/Library/Mobile Documents/com~apple~CloudDocs/Dev/Forge/MongoDB_Code/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.rtl.css" target="staticwebassets/lib/bootstrap/dist/css/bootstrap-utilities.rtl.css" />
+    <file src="/Users/ielo/Library/Mobile Documents/com~apple~CloudDocs/Dev/Forge/MongoDB_Code/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.rtl.css.map" target="staticwebassets/lib/bootstrap/dist/css/bootstrap-utilities.rtl.css.map" />
+    <file src="/Users/ielo/Library/Mobile Documents/com~apple~CloudDocs/Dev/Forge/MongoDB_Code/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.rtl.min.css" target="staticwebassets/lib/bootstrap/dist/css/bootstrap-utilities.rtl.min.css" />
+    <file src="/Users/ielo/Library/Mobile Documents/com~apple~CloudDocs/Dev/Forge/MongoDB_Code/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.rtl.min.css.map" target="staticwebassets/lib/bootstrap/dist/css/bootstrap-utilities.rtl.min.css.map" />
+    <file src="/Users/ielo/Library/Mobile Documents/com~apple~CloudDocs/Dev/Forge/MongoDB_Code/wwwroot/lib/bootstrap/dist/css/bootstrap.css" target="staticwebassets/lib/bootstrap/dist/css/bootstrap.css" />
+    <file src="/Users/ielo/Library/Mobile Documents/com~apple~CloudDocs/Dev/Forge/MongoDB_Code/wwwroot/lib/bootstrap/dist/css/bootstrap.css.map" target="staticwebassets/lib/bootstrap/dist/css/bootstrap.css.map" />
+    <file src="/Users/ielo/Library/Mobile Documents/com~apple~CloudDocs/Dev/Forge/MongoDB_Code/wwwroot/lib/bootstrap/dist/css/bootstrap.min.css" target="staticwebassets/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <file src="/Users/ielo/Library/Mobile Documents/com~apple~CloudDocs/Dev/Forge/MongoDB_Code/wwwroot/lib/bootstrap/dist/css/bootstrap.min.css.map" target="staticwebassets/lib/bootstrap/dist/css/bootstrap.min.css.map" />
+    <file src="/Users/ielo/Library/Mobile Documents/com~apple~CloudDocs/Dev/Forge/MongoDB_Code/wwwroot/lib/bootstrap/dist/css/bootstrap.rtl.css" target="staticwebassets/lib/bootstrap/dist/css/bootstrap.rtl.css" />
+    <file src="/Users/ielo/Library/Mobile Documents/com~apple~CloudDocs/Dev/Forge/MongoDB_Code/wwwroot/lib/bootstrap/dist/css/bootstrap.rtl.css.map" target="staticwebassets/lib/bootstrap/dist/css/bootstrap.rtl.css.map" />
+    <file src="/Users/ielo/Library/Mobile Documents/com~apple~CloudDocs/Dev/Forge/MongoDB_Code/wwwroot/lib/bootstrap/dist/css/bootstrap.rtl.min.css" target="staticwebassets/lib/bootstrap/dist/css/bootstrap.rtl.min.css" />
+    <file src="/Users/ielo/Library/Mobile Documents/com~apple~CloudDocs/Dev/Forge/MongoDB_Code/wwwroot/lib/bootstrap/dist/css/bootstrap.rtl.min.css.map" target="staticwebassets/lib/bootstrap/dist/css/bootstrap.rtl.min.css.map" />
+    <file src="/Users/ielo/Library/Mobile Documents/com~apple~CloudDocs/Dev/Forge/MongoDB_Code/wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.js" target="staticwebassets/lib/bootstrap/dist/js/bootstrap.bundle.js" />
+    <file src="/Users/ielo/Library/Mobile Documents/com~apple~CloudDocs/Dev/Forge/MongoDB_Code/wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.js.map" target="staticwebassets/lib/bootstrap/dist/js/bootstrap.bundle.js.map" />
+    <file src="/Users/ielo/Library/Mobile Documents/com~apple~CloudDocs/Dev/Forge/MongoDB_Code/wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.min.js" target="staticwebassets/lib/bootstrap/dist/js/bootstrap.bundle.min.js" />
+    <file src="/Users/ielo/Library/Mobile Documents/com~apple~CloudDocs/Dev/Forge/MongoDB_Code/wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.min.js.map" target="staticwebassets/lib/bootstrap/dist/js/bootstrap.bundle.min.js.map" />
+    <file src="/Users/ielo/Library/Mobile Documents/com~apple~CloudDocs/Dev/Forge/MongoDB_Code/wwwroot/lib/bootstrap/dist/js/bootstrap.esm.js" target="staticwebassets/lib/bootstrap/dist/js/bootstrap.esm.js" />
+    <file src="/Users/ielo/Library/Mobile Documents/com~apple~CloudDocs/Dev/Forge/MongoDB_Code/wwwroot/lib/bootstrap/dist/js/bootstrap.esm.js.map" target="staticwebassets/lib/bootstrap/dist/js/bootstrap.esm.js.map" />
+    <file src="/Users/ielo/Library/Mobile Documents/com~apple~CloudDocs/Dev/Forge/MongoDB_Code/wwwroot/lib/bootstrap/dist/js/bootstrap.esm.min.js" target="staticwebassets/lib/bootstrap/dist/js/bootstrap.esm.min.js" />
+    <file src="/Users/ielo/Library/Mobile Documents/com~apple~CloudDocs/Dev/Forge/MongoDB_Code/wwwroot/lib/bootstrap/dist/js/bootstrap.esm.min.js.map" target="staticwebassets/lib/bootstrap/dist/js/bootstrap.esm.min.js.map" />
+    <file src="/Users/ielo/Library/Mobile Documents/com~apple~CloudDocs/Dev/Forge/MongoDB_Code/wwwroot/lib/bootstrap/dist/js/bootstrap.js" target="staticwebassets/lib/bootstrap/dist/js/bootstrap.js" />
+    <file src="/Users/ielo/Library/Mobile Documents/com~apple~CloudDocs/Dev/Forge/MongoDB_Code/wwwroot/lib/bootstrap/dist/js/bootstrap.js.map" target="staticwebassets/lib/bootstrap/dist/js/bootstrap.js.map" />
+    <file src="/Users/ielo/Library/Mobile Documents/com~apple~CloudDocs/Dev/Forge/MongoDB_Code/wwwroot/lib/bootstrap/dist/js/bootstrap.min.js" target="staticwebassets/lib/bootstrap/dist/js/bootstrap.min.js" />
+    <file src="/Users/ielo/Library/Mobile Documents/com~apple~CloudDocs/Dev/Forge/MongoDB_Code/wwwroot/lib/bootstrap/dist/js/bootstrap.min.js.map" target="staticwebassets/lib/bootstrap/dist/js/bootstrap.min.js.map" />
+    <file src="/Users/ielo/Library/Mobile Documents/com~apple~CloudDocs/Dev/Forge/MongoDB_Code/wwwroot/lib/jquery-validation-unobtrusive/LICENSE.txt" target="staticwebassets/lib/jquery-validation-unobtrusive/LICENSE.txt" />
+    <file src="/Users/ielo/Library/Mobile Documents/com~apple~CloudDocs/Dev/Forge/MongoDB_Code/wwwroot/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js" target="staticwebassets/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js" />
+    <file src="/Users/ielo/Library/Mobile Documents/com~apple~CloudDocs/Dev/Forge/MongoDB_Code/wwwroot/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js" target="staticwebassets/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js" />
+    <file src="/Users/ielo/Library/Mobile Documents/com~apple~CloudDocs/Dev/Forge/MongoDB_Code/wwwroot/lib/jquery-validation/LICENSE.md" target="staticwebassets/lib/jquery-validation/LICENSE.md" />
+    <file src="/Users/ielo/Library/Mobile Documents/com~apple~CloudDocs/Dev/Forge/MongoDB_Code/wwwroot/lib/jquery-validation/dist/additional-methods.js" target="staticwebassets/lib/jquery-validation/dist/additional-methods.js" />
+    <file src="/Users/ielo/Library/Mobile Documents/com~apple~CloudDocs/Dev/Forge/MongoDB_Code/wwwroot/lib/jquery-validation/dist/additional-methods.min.js" target="staticwebassets/lib/jquery-validation/dist/additional-methods.min.js" />
+    <file src="/Users/ielo/Library/Mobile Documents/com~apple~CloudDocs/Dev/Forge/MongoDB_Code/wwwroot/lib/jquery-validation/dist/jquery.validate.js" target="staticwebassets/lib/jquery-validation/dist/jquery.validate.js" />
+    <file src="/Users/ielo/Library/Mobile Documents/com~apple~CloudDocs/Dev/Forge/MongoDB_Code/wwwroot/lib/jquery-validation/dist/jquery.validate.min.js" target="staticwebassets/lib/jquery-validation/dist/jquery.validate.min.js" />
+    <file src="/Users/ielo/Library/Mobile Documents/com~apple~CloudDocs/Dev/Forge/MongoDB_Code/wwwroot/lib/jquery/LICENSE.txt" target="staticwebassets/lib/jquery/LICENSE.txt" />
+    <file src="/Users/ielo/Library/Mobile Documents/com~apple~CloudDocs/Dev/Forge/MongoDB_Code/wwwroot/lib/jquery/dist/jquery.js" target="staticwebassets/lib/jquery/dist/jquery.js" />
+    <file src="/Users/ielo/Library/Mobile Documents/com~apple~CloudDocs/Dev/Forge/MongoDB_Code/wwwroot/lib/jquery/dist/jquery.min.js" target="staticwebassets/lib/jquery/dist/jquery.min.js" />
+    <file src="/Users/ielo/Library/Mobile Documents/com~apple~CloudDocs/Dev/Forge/MongoDB_Code/wwwroot/lib/jquery/dist/jquery.min.map" target="staticwebassets/lib/jquery/dist/jquery.min.map" />
+    <file src="/Users/ielo/Library/Mobile Documents/com~apple~CloudDocs/Dev/Forge/MongoDB_Code/obj/Release/net6.0/staticwebassets/msbuild.MongoDB_Code.Microsoft.AspNetCore.StaticWebAssets.props" target="build/Microsoft.AspNetCore.StaticWebAssets.props" />
+    <file src="/Users/ielo/Library/Mobile Documents/com~apple~CloudDocs/Dev/Forge/MongoDB_Code/obj/Release/net6.0/staticwebassets/msbuild.build.MongoDB_Code.props" target="build/MongoDB_Code.props" />
+    <file src="/Users/ielo/Library/Mobile Documents/com~apple~CloudDocs/Dev/Forge/MongoDB_Code/obj/Release/net6.0/staticwebassets/msbuild.buildMultiTargeting.MongoDB_Code.props" target="buildMultiTargeting/MongoDB_Code.props" />
+    <file src="/Users/ielo/Library/Mobile Documents/com~apple~CloudDocs/Dev/Forge/MongoDB_Code/obj/Release/net6.0/staticwebassets/msbuild.buildTransitive.MongoDB_Code.props" target="buildTransitive/MongoDB_Code.props" />
+  </files>
+</package>

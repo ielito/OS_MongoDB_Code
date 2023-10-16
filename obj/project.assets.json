@@ -1,7 +1,7 @@
 {
   "version": 3,
   "targets": {
-    "net7.0": {
+    "net6.0": {
       "AWSSDK.Core/3.7.100.14": {
         "type": "package",
         "compile": {
@@ -211,6 +211,19 @@
         "runtime": {
           "lib/netstandard2.0/Newtonsoft.Json.Bson.dll": {
             "related": ".pdb;.xml"
+          }
+        }
+      },
+      "OutSystems.ExternalLibraries.SDK/1.4.0": {
+        "type": "package",
+        "compile": {
+          "lib/net6.0/OutSystems.ExternalLibraries.SDK.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net6.0/OutSystems.ExternalLibraries.SDK.dll": {
+            "related": ".xml"
           }
         }
       },
@@ -616,6 +629,23 @@
         "newtonsoft.json.bson.nuspec"
       ]
     },
+    "OutSystems.ExternalLibraries.SDK/1.4.0": {
+      "sha512": "LrQtKoI6v9+LOSfyWjoWNM2ZR3g565CDr2JZPnIY37pXaKH58J5WOf5T2evo8ZBP3UZuNvumISPFEcU2nOZs2A==",
+      "type": "package",
+      "path": "outsystems.externallibraries.sdk/1.4.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "OutSystems.png",
+        "README.MD",
+        "lib/net6.0/OutSystems.ExternalLibraries.SDK.dll",
+        "lib/net6.0/OutSystems.ExternalLibraries.SDK.xml",
+        "lib/netstandard2.0/OutSystems.ExternalLibraries.SDK.dll",
+        "lib/netstandard2.0/OutSystems.ExternalLibraries.SDK.xml",
+        "outsystems.externallibraries.sdk.1.4.0.nupkg.sha512",
+        "outsystems.externallibraries.sdk.nuspec"
+      ]
+    },
     "SharpCompress/0.30.1": {
       "sha512": "XqD4TpfyYGa7QTPzaGlMVbcecKnXy4YmYLDWrU+JIj7IuRNl7DH2END+Ll7ekWIY8o3dAMWLFDE1xdhfIWD1nw==",
       "type": "package",
@@ -859,11 +889,12 @@
     }
   },
   "projectFileDependencyGroups": {
-    "net7.0": [
+    "net6.0": [
       "MongoDB.Bson >= 2.22.0",
       "MongoDB.Driver >= 2.22.0",
       "Newtonsoft.Json >= 13.0.3",
-      "Newtonsoft.Json.Bson >= 1.0.2"
+      "Newtonsoft.Json.Bson >= 1.0.2",
+      "OutSystems.ExternalLibraries.SDK >= 1.4.0"
     ]
   },
   "packageFolders": {
@@ -882,7 +913,7 @@
         "/Users/ielo/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
-        "net7.0"
+        "net6.0"
       ],
       "sources": {
         "/usr/local/share/dotnet/library-packs": {},
@@ -890,8 +921,8 @@
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
-        "net7.0": {
-          "targetAlias": "net7.0",
+        "net6.0": {
+          "targetAlias": "net6.0",
           "projectReferences": {}
         }
       },
@@ -902,8 +933,8 @@
       }
     },
     "frameworks": {
-      "net7.0": {
-        "targetAlias": "net7.0",
+      "net6.0": {
+        "targetAlias": "net6.0",
         "dependencies": {
           "MongoDB.Bson": {
             "target": "Package",
@@ -920,6 +951,10 @@
           "Newtonsoft.Json.Bson": {
             "target": "Package",
             "version": "[1.0.2, )"
+          },
+          "OutSystems.ExternalLibraries.SDK": {
+            "target": "Package",
+            "version": "[1.4.0, )"
           }
         },
         "imports": [
