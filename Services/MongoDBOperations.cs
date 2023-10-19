@@ -1,4 +1,5 @@
-﻿using MongoDB_Code.Models;
+﻿using OutSystems.ExternalLibraries.SDK;
+using MongoDB_Code.Models;
 using MongoDB_Code.Services;
 
 namespace MongoDB_Code.Operations
@@ -16,6 +17,11 @@ namespace MongoDB_Code.Operations
 
         public void SaveSettings(string connectionString, string databaseName, string collectionName)
         {
+            if (_mongoDBServiceProvider == null)
+            {
+                throw new InvalidOperationException("MongoDBServiceProvider is not initialized.");
+            }
+
             var newSettings = new MyDatabaseSettings
             {
                 ConnectionString = connectionString,
@@ -28,7 +34,17 @@ namespace MongoDB_Code.Operations
 
         public MongoDBSettings GetSettings()
         {
+            if (_mongoDBServiceProvider == null)
+            {
+                throw new InvalidOperationException("MongoDBServiceProvider is not initialized.");
+            }
+
             var settings = _mongoDBServiceProvider.GetCurrentSettings();
+            if (settings == null)
+            {
+                throw new InvalidOperationException("Database settings have not been initialized.");
+            }
+
             return new MongoDBSettings
             {
                 ConnectionString = settings.ConnectionString,

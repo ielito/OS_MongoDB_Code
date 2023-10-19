@@ -5,51 +5,51 @@ using MongoDB_Code.Models;
 namespace MongoDB_Code.Services
 {
     public class MongoDBService
+    {
+        private MyDatabaseSettings? _settings;
+        private readonly ILogger<MongoDBService> _logger;
+        private IMongoCollection<BsonDocument>? _collection;
+        private readonly MongoClient? _mongoClient;
+
+        public MongoDBService(MyDatabaseSettings settings, ILogger<MongoDBService> logger)
         {
-            private MyDatabaseSettings? _settings;
-            private readonly ILogger<MongoDBService> _logger;
-            private IMongoCollection<BsonDocument> _collection;
-            private readonly MongoClient? _mongoClient;
-            //private readonly IMongoDatabase? _database;
+            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
+            _settings = settings ?? throw new ArgumentNullException(nameof(settings));
 
-            public MongoDBService(MyDatabaseSettings settings, ILogger<MongoDBService> logger)
+            if (string.IsNullOrEmpty(settings.ConnectionString))
             {
-                _logger = logger ?? throw new ArgumentNullException(nameof(logger));
-                _settings = settings ?? throw new ArgumentNullException(nameof(settings));
+                _logger.LogError("Connection string is empty. MongoDB client is not initialized.");
+                return;
+            }
 
-                if (string.IsNullOrEmpty(settings.ConnectionString))
-                {
-                    _logger.LogError("Connection string is empty. MongoDB client is not initialized.");
-                    return;
-                }
-
-                _mongoClient = new MongoClient(settings.ConnectionString);
-
-
-                _settings = settings ?? throw new ArgumentNullException(nameof(settings));
-                _logger = logger ?? throw new ArgumentNullException(nameof(logger));
-
-                var client = new MongoClient(_settings.ConnectionString);
-                _mongoClient = new MongoClient(settings.ConnectionString);
-                var database = _mongoClient.GetDatabase(_settings.DatabaseName);
-                _collection = database.GetCollection<BsonDocument>(_settings.CollectionName);
-                _mongoClient = new MongoClient(settings.ConnectionString);
-        
+            _mongoClient = new MongoClient(settings.ConnectionString);
+            var database = _mongoClient.GetDatabase(_settings.DatabaseName);
+            _collection = database.GetCollection<BsonDocument>(_settings.CollectionName);
         }
 
-            public void UpdateConfiguration(MyDatabaseSettings settings)
+        public void UpdateConfiguration(MyDatabaseSettings settings)
+        {
+            if (settings == null)
             {
-                 _settings = settings;
-
-                var client = new MongoClient(_settings.ConnectionString);
-                var database = client.GetDatabase(_settings.DatabaseName);
-                _collection = database.GetCollection<BsonDocument>(_settings.CollectionName);
+                throw new ArgumentNullException(nameof(settings));
             }
 
-            public MyDatabaseSettings GetCurrentSettings()
+            _settings = settings;
+
+            if (_settings == null)
             {
-                return _settings;
+                throw new InvalidOperationException("Settings are not initialized.");
             }
+
+            var client = new MongoClient(_settings.ConnectionString);
+            var database = client.GetDatabase(_settings.DatabaseName);
+            _collection = database.GetCollection<BsonDocument>(_settings.CollectionName);
+        }
+
+        public MyDatabaseSettings GetCurrentSettings()
+        {
+            return _settings;
+        }
 
         public async Task<List<BsonDocument>> RetrieveDataAsync(int limit = 1)
         {

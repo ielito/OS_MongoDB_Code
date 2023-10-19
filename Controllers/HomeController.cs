@@ -21,6 +21,12 @@ namespace MongoDB_Code.Controllers
             _logger.LogInformation("Entering Index method in HomeController.");
 
             var mongoDBService = _mongoDBServiceProvider.CreateService();
+
+            if (mongoDBService == null)
+            {
+                throw new InvalidOperationException("MongoDBService is not initialized.");
+            }
+            
             var model = new IndexModel(mongoDBService);
 
             try
@@ -53,7 +59,7 @@ namespace MongoDB_Code.Controllers
             _logger.LogWarning("Entering Error view in HomeController.");
 
             var settings = _mongoDBServiceProvider.GetCurrentSettings();
-            if (string.IsNullOrEmpty(settings.ConnectionString))
+            if (settings == null || string.IsNullOrEmpty(settings.ConnectionString))
             {
                 _logger.LogWarning("Connection string is empty. Redirecting to Backoffice Index view from HomeController Error method.");
                 return RedirectToAction("Index", "Backoffice");
