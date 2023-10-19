@@ -1,12 +1,26 @@
 ﻿using MongoDB.Bson;
 using MongoDB.Driver;
 using MongoDB_Code.Models;
+using Newtonsoft.Json;
 
 namespace MongoDB_Code.Services
 {
+
+    namespace MongoDB_Code.Services
+    {
+        public static class Extensions
+        {
+            public static T DeepCopy<T>(this T obj)
+            {
+                var serialized = JsonConvert.SerializeObject(obj);
+                return JsonConvert.DeserializeObject<T>(serialized);
+            }
+        }
+    }
+
     public class MongoDBService
     {
-        private MyDatabaseSettings? _settings;
+        private MyDatabaseSettings _settings;
         private readonly ILogger<MongoDBService> _logger;
         private IMongoCollection<BsonDocument>? _collection;
         private readonly MongoClient? _mongoClient;
@@ -35,11 +49,6 @@ namespace MongoDB_Code.Services
             }
 
             _settings = settings;
-
-            if (_settings == null)
-            {
-                throw new InvalidOperationException("Settings are not initialized.");
-            }
 
             var client = new MongoClient(_settings.ConnectionString);
             var database = client.GetDatabase(_settings.DatabaseName);

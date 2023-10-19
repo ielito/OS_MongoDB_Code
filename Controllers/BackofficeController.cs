@@ -12,12 +12,12 @@ namespace MongoDB_Code.Controllers
         private readonly CryptoService? _cryptoService;
         private readonly IConfiguration _configuration;
 
-        public BackofficeController(MongoDBServiceProvider mongoDBServiceProvider, ILogger<BackofficeController> logger, CryptoService cryptoService, IConfiguration configuration)
+        public BackofficeController(MongoDBServiceProvider? mongoDBServiceProvider, ILogger<BackofficeController> logger, CryptoService? cryptoService, IConfiguration configuration)
         {
             _mongoDBServiceProvider = mongoDBServiceProvider ?? throw new ArgumentNullException(nameof(mongoDBServiceProvider));
-            _logger = logger;
+            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
             _cryptoService = cryptoService ?? throw new ArgumentNullException(nameof(cryptoService));
-            _configuration = configuration;
+            _configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
         }
 
         [HttpPost]
@@ -72,12 +72,7 @@ namespace MongoDB_Code.Controllers
         {
             _logger.LogInformation("Entering Index method in BackofficeController.");
 
-            if (_mongoDBServiceProvider == null)
-            {
-                throw new InvalidOperationException("MongoDBServiceProvider is not initialized.");
-            }
-
-            var settings = _mongoDBServiceProvider.GetCurrentSettings();
+            var settings = _mongoDBServiceProvider?.GetCurrentSettings() ?? new MyDatabaseSettings();
 
             if (string.IsNullOrEmpty(settings.ConnectionString))
             {
