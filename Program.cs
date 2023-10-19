@@ -7,7 +7,6 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddSingleton<CryptoService>();
 builder.Services.AddSession();
 builder.Services.AddControllersWithViews().AddSessionStateTempDataProvider();
-builder.Services.AddHttpContextAccessor();
 builder.Services.AddSingleton<MongoDBServiceProvider>();
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddDistributedMemoryCache();

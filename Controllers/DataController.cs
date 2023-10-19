@@ -16,6 +16,12 @@ namespace MongoDB_Code.Controllers
         public async Task<IActionResult> Index()
         {
             var mongoService = _mongoDBServiceProvider.CreateService();
+
+            if (mongoService == null)
+            {
+                throw new InvalidOperationException("MongoDBService is not initialized.");
+            }
+
             var data = await mongoService.RetrieveDataAsync();
             return View(data);
         }

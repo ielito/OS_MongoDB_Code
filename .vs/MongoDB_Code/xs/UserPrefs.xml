@@ -1,24 +1,19 @@
 ﻿<Properties StartupConfiguration="{B03C2945-998A-4C13-BBED-10BF32014CC5}|https">
-  <MonoDevelop.Ide.ItemProperties.MongoDB__Code PreferredExecutionTarget="/Applications/Google Chrome.app" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Interfaces/IMongoDBOperations.cs">
     <Files>
-      <File FileName="Services/MongoDBServiceProvider.cs" Line="69" Column="109" />
-      <File FileName="Interfaces/IMongoDBOperations.cs" Line="4" Column="20" />
-      <File FileName="Services/MongoDBOperations.cs" Line="10" Column="39" />
-      <File FileName="Controllers/BackofficeController.cs" />
-      <File FileName="../../../../../../../../usr/local/share/dotnet/sdk/7.0.307/Sdks/Microsoft.NET.Sdk/targets/Microsoft.PackageDependencyResolution.targets" Line="266" Column="5" />
+      <File FileName="Interfaces/IMongoDBOperations.cs" Line="16" Column="2" />
+      <File FileName="Services/MongoDBService.cs" Line="1" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="MongoDB_Code">
-            <Node name="MongoDB_Code">
-              <Node name="Dependencies" expanded="True">
-                <Node name="FrameworkReferences" expanded="True" />
-                <Node name="PackageDependencies" expanded="True" />
-              </Node>
+            <Node name="MongoDB_Code" expanded="True">
               <Node name="Controllers" expanded="True" />
-              <Node name="Interfaces" expanded="True" />
+              <Node name="Interfaces" expanded="True">
+                <Node name="IMongoDBOperations.cs" selected="True" />
+              </Node>
+              <Node name="Models" expanded="True" />
               <Node name="Services" expanded="True" />
             </Node>
           </Node>
@@ -26,10 +21,11 @@
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Release" />
+  <MonoDevelop.Ide.ItemProperties.MongoDB__Code PreferredExecutionTarget="/Applications/Google Chrome.app" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Release" />
   <MultiItemStartupConfigurations />
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
 </Properties>

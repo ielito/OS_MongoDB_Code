@@ -1,9 +1,25 @@
 ﻿using Microsoft.Extensions.Options;
 using MongoDB_Code.Models;
 using MongoDB.Driver;
+using Newtonsoft.Json;
+
 
 namespace MongoDB_Code.Services
 {
+
+    using Newtonsoft.Json;
+
+    public static class Extensions
+    {
+        public static T DeepCopy<T>(this T obj)
+        {
+            var serialized = JsonConvert.SerializeObject(obj);
+            return JsonConvert.DeserializeObject<T>(serialized);
+        }
+    }
+
+
+
     public class MongoDBServiceProvider
     {
         private MyDatabaseSettings? _settings;
@@ -16,7 +32,9 @@ namespace MongoDB_Code.Services
 
         public MongoDBServiceProvider(IOptions<MyDatabaseSettings> settings, ILogger<MongoDBService> logger, CryptoService cryptoService, IHttpContextAccessor httpContextAccessor)
         {
-            _logger = logger;
+            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
+            _cryptoService = cryptoService ?? throw new ArgumentNullException(nameof(cryptoService));
+            _httpContextAccessor = httpContextAccessor ?? throw new ArgumentNullException(nameof(httpContextAccessor));
 
             if (string.IsNullOrEmpty(settings.Value.ConnectionString))
             {
@@ -39,9 +57,7 @@ namespace MongoDB_Code.Services
             }
 
             _settings = settings.Value;
-            _cryptoService = cryptoService;
             _mongoDBService = new MongoDBService(_settings, _logger);
-            _httpContextAccessor = httpContextAccessor;
         }
 
         public void UpdateSettings(MyDatabaseSettings newSettings)
@@ -61,13 +77,15 @@ namespace MongoDB_Code.Services
 
             var encryptionKey = _httpContextAccessor.HttpContext.Session.GetString("EncryptionKey");
 
-            if (!string.IsNullOrEmpty(_settings.ConnectionString))
+            var clonedSettings = _settings.DeepCopy();
+
+            if (!string.IsNullOrEmpty(clonedSettings.ConnectionString))
             {
-                if (CryptoService.IsBase64String(_settings.ConnectionString))
+                if (CryptoService.IsBase64String(clonedSettings.ConnectionString))
                 {
                     _logger.LogInformation("Decrypting connection string.");
-                    var decryptedConnectionString = CryptoService.DecryptString(_settings.ConnectionString, encryptionKey);
-                    _settings.ConnectionString = decryptedConnectionString;
+                    var decryptedConnectionString = CryptoService.DecryptString(clonedSettings.ConnectionString, encryptionKey);
+                    clonedSettings.ConnectionString = decryptedConnectionString;
                 }
                 else
                 {
@@ -79,7 +97,7 @@ namespace MongoDB_Code.Services
                 _logger.LogWarning("Connection string is empty.");
             }
 
-            return _settings;
+            return clonedSettings;
         }
     }
 }

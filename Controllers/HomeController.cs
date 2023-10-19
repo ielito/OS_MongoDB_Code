@@ -26,7 +26,7 @@ namespace MongoDB_Code.Controllers
             {
                 throw new InvalidOperationException("MongoDBService is not initialized.");
             }
-            
+
             var model = new IndexModel(mongoDBService);
 
             try
