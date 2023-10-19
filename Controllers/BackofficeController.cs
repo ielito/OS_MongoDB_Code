@@ -10,14 +10,14 @@ namespace MongoDB_Code.Controllers
         private readonly MongoDBServiceProvider _mongoDBServiceProvider;
         private readonly ILogger<BackofficeController> _logger;
         private readonly CryptoService? _cryptoService;
-        private readonly string? _encryptionKey;
+        //private readonly string _encryptionKey;
         private readonly IConfiguration _configuration;
 
         public BackofficeController(MongoDBServiceProvider mongoDBServiceProvider, ILogger<BackofficeController> logger, CryptoService cryptoService, IConfiguration configuration)
         {
             _mongoDBServiceProvider = mongoDBServiceProvider;
             _logger = logger;
-            _cryptoService = cryptoService;
+            _cryptoService = cryptoService ?? throw new ArgumentNullException(nameof(cryptoService));
             _configuration = configuration;
         }
 

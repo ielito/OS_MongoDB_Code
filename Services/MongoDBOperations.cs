@@ -5,11 +5,10 @@ namespace MongoDB_Code.Operations
 {
     public class MongoDBOperations : IMongoDBOperations
     {
-        private readonly MongoDBServiceProvider _mongoDBServiceProvider;
+        private readonly MongoDBServiceProvider? _mongoDBServiceProvider;
 
         public MongoDBOperations() { }
 
-        // Construtor com parâmetros (opcional)
         public MongoDBOperations(MongoDBServiceProvider mongoDBServiceProvider)
         {
             _mongoDBServiceProvider = mongoDBServiceProvider;

@@ -12,7 +12,7 @@ namespace MongoDB_Code.Controllers
 
         public HomeController(MongoDBServiceProvider mongoDBServiceProvider, ILogger<HomeController> logger)
         {
-            _mongoDBServiceProvider = mongoDBServiceProvider;
+            _mongoDBServiceProvider = mongoDBServiceProvider ?? throw new ArgumentNullException(nameof(mongoDBServiceProvider));
             _logger = logger;
         }
 

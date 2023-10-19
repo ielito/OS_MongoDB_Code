@@ -10,7 +10,7 @@ namespace MongoDB_Code.Services
             private readonly ILogger<MongoDBService> _logger;
             private IMongoCollection<BsonDocument> _collection;
             private readonly MongoClient? _mongoClient;
-            private readonly IMongoDatabase? _database;
+            //private readonly IMongoDatabase? _database;
 
             public MongoDBService(MyDatabaseSettings settings, ILogger<MongoDBService> logger)
             {
