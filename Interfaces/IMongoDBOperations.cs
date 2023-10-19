@@ -5,6 +5,7 @@ public interface IMongoDBOperations
 {
     void SaveSettings(string connectionString, string databaseName, string collectionName);
     MongoDBSettings GetSettings();
+    void InitializeMongoDB();
 }
 
 [OSStructure]

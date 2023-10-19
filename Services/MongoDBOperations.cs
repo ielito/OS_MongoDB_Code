@@ -10,6 +10,11 @@ namespace MongoDB_Code.Operations
 
         public MongoDBOperations() { }
 
+        public void InitializeMongoDB()
+        {
+            _mongoDBServiceProvider.Initialize();
+        }
+
         public MongoDBOperations(MongoDBServiceProvider mongoDBServiceProvider)
         {
             _mongoDBServiceProvider = mongoDBServiceProvider;

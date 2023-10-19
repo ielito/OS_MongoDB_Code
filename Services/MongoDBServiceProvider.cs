@@ -2,14 +2,28 @@
 using MongoDB_Code.Models;
 using MongoDB_Code.Services;
 using MongoDB.Driver;
+using MongoDB.Bson;
 
 public class MongoDBServiceProvider
 {
-    private MyDatabaseSettings _settings;
-    private readonly ILogger<MongoDBService> _logger;
+    private MyDatabaseSettings? _settings;
+    private ILogger<MongoDBService> _logger;
     private MongoDBService _mongoDBService;
-    private readonly MongoClient? _mongoClient;
-    private readonly IMongoDatabase? _database;
+    private MongoClient? _mongoClient;
+    private IMongoDatabase? _database;
+    private IMongoCollection<BsonDocument>? _collection;
+
+    public void Initialize()
+    {
+        if (string.IsNullOrEmpty(_settings?.ConnectionString))
+        {
+            _logger.LogError("Connection string is empty. MongoDB client is not initialized.");
+            return;
+        }
+        _mongoClient = new MongoClient(_settings.ConnectionString);
+        var database = _mongoClient.GetDatabase(_settings.DatabaseName);
+        _collection = database.GetCollection<BsonDocument>(_settings.CollectionName);
+    }
 
     public MongoDBServiceProvider(IOptions<MyDatabaseSettings> settings, ILogger<MongoDBService> logger)
     {
