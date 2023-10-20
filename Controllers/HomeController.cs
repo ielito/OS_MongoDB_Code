@@ -7,12 +7,13 @@ namespace MongoDB_Code.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly MongoDBServiceProvider _mongoDBServiceProvider;
+        private readonly MongoDBService _mongoDBService; // Alterado para MongoDBService
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(MongoDBServiceProvider mongoDBServiceProvider, ILogger<HomeController> logger)
+        // Injeção de dependência do MongoDBService diretamente no construtor
+        public HomeController(MongoDBService mongoDBService, ILogger<HomeController> logger)
         {
-            _mongoDBServiceProvider = mongoDBServiceProvider ?? throw new ArgumentNullException(nameof(mongoDBServiceProvider));
+            _mongoDBService = mongoDBService ?? throw new ArgumentNullException(nameof(mongoDBService));
             _logger = logger;
         }
 
@@ -20,14 +21,12 @@ namespace MongoDB_Code.Controllers
         {
             _logger.LogInformation("Entering Index method in HomeController.");
 
-            var mongoDBService = _mongoDBServiceProvider.CreateService();
-
-            if (mongoDBService == null)
+            if (_mongoDBService == null)
             {
                 throw new InvalidOperationException("MongoDBService is not initialized.");
             }
 
-            var model = new IndexModel(mongoDBService);
+            var model = new IndexModel(_mongoDBService);
 
             try
             {
@@ -58,7 +57,7 @@ namespace MongoDB_Code.Controllers
         {
             _logger.LogWarning("Entering Error view in HomeController.");
 
-            var settings = _mongoDBServiceProvider.GetCurrentSettings();
+            var settings = _mongoDBService.GetCurrentSettings();
             if (settings == null || string.IsNullOrEmpty(settings.ConnectionString))
             {
                 _logger.LogWarning("Connection string is empty. Redirecting to Backoffice Index view from HomeController Error method.");

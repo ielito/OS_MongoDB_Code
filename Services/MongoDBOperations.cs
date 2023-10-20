@@ -2,72 +2,58 @@
 using MongoDB_Code.Models;
 using MongoDB_Code.Services;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
+using MongoDB.Bson;
+using MongoDB.Driver;
+using System;
+using System.Collections.Generic;
 using Amazon.Runtime.Internal.Util;
+using DnsClient.Internal;
 
 namespace MongoDB_Code.Operations
 {
     public class MongoDBOperations : IMongoDBOperations
     {
-        private static readonly MongoDBServiceProvider _mongoDBServiceProviderSingleton;
+        private readonly MongoDBServiceProvider _mongoDBServiceProvider;
         private readonly ILogger<MongoDBOperations> _logger;
 
-        static MongoDBOperations()
+        public MongoDBOperations(ILogger<MongoDBOperations> logger)
         {
-            var loggerFactory = new LoggerFactory();
-            var defaultSettings = new MyDatabaseSettings
+            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
+            ILogger<MongoDBService> mongoServiceLogger = new Logger<MongoDBService>(new LoggerFactory());
+            _mongoDBServiceProvider = new MongoDBServiceProvider(mongoServiceLogger);
+        }
+
+        public void InitializeMongoDB(string connectionString, string databaseName, string collectionName)
+        {
+            var settings = new MyDatabaseSettings
             {
-                ConnectionString = "",
-                DatabaseName = "",
-                CollectionName = ""
+                ConnectionString = connectionString,
+                DatabaseName = databaseName,
+                CollectionName = collectionName
             };
-            var options = Options.Create(defaultSettings);
-            _mongoDBServiceProviderSingleton = new MongoDBServiceProvider(options, new Logger<MongoDBService>(loggerFactory));
-        }
-
-        public MongoDBOperations()
-        {
-            _logger = new Logger<MongoDBOperations>(new LoggerFactory());
-        }
-
-        public void InitializeMongoDB()
-        {
-            if (_mongoDBServiceProviderSingleton == null)
-            {
-                _logger.LogError("Failed to initialize MongoDB: MongoDBServiceProvider is not initialized.");
-                throw new InvalidOperationException("MongoDBServiceProvider is not initialized.");
-            }
-
-            _logger.LogInformation("Initializing MongoDB...");
-            _mongoDBServiceProviderSingleton.Initialize();
+            _mongoDBServiceProvider.Initialize(settings);
             _logger.LogInformation("MongoDB initialized successfully.");
         }
 
         public void SaveSettings(string connectionString, string databaseName, string collectionName)
         {
-            if (_mongoDBServiceProviderSingleton == null)
-            {
-                throw new InvalidOperationException("MongoDBServiceProvider is not initialized.");
-            }
-
             var newSettings = new MyDatabaseSettings
             {
                 ConnectionString = connectionString,
                 DatabaseName = databaseName,
                 CollectionName = collectionName
             };
-
-            _mongoDBServiceProviderSingleton.UpdateSettings(newSettings);
+            _mongoDBServiceProvider.UpdateSettings(newSettings);
         }
 
         public MongoDBSettings GetSettings()
         {
-            if (_mongoDBServiceProviderSingleton == null)
+            if (_mongoDBServiceProvider == null)
             {
                 throw new InvalidOperationException("MongoDBServiceProvider is not initialized.");
             }
 
-            var settings = _mongoDBServiceProviderSingleton.GetCurrentSettings();
+            var settings = _mongoDBServiceProvider.GetCurrentSettings();
             if (settings == null)
             {
                 throw new InvalidOperationException("Database settings have not been initialized.");
@@ -79,6 +65,35 @@ namespace MongoDB_Code.Operations
                 DatabaseName = settings.DatabaseName,
                 CollectionName = settings.CollectionName
             };
+        }
+
+        public List<MongoDBRecord> GetAllRecordsFromCollection(string connectionString, string databaseName, string collectionName)
+        {
+            // Criar uma nova instância do MongoDBServiceProvider com as configurações fornecidas
+            var settings = new MyDatabaseSettings
+            {
+                ConnectionString = connectionString,
+                DatabaseName = databaseName,
+                CollectionName = collectionName
+            };
+            _mongoDBServiceProvider.Initialize(settings);
+
+            var records = new List<MongoDBRecord>();
+
+            // Obtenha a coleção do MongoDB
+            var collection = _mongoDBServiceProvider.GetCollection<BsonDocument>(collectionName);
+
+            // Consulte todos os registros da coleção
+            var documents = collection.Find(_ => true).ToList();
+
+            // Converta cada documento BSON em uma string JSON e adicione à lista
+            foreach (var document in documents)
+            {
+                var json = document.ToJson();
+                records.Add(new MongoDBRecord { Data = json });
+            }
+
+            return records;
         }
     }
 }

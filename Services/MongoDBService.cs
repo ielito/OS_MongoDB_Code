@@ -30,13 +30,13 @@ namespace MongoDB_Code.Services
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
             _settings = settings ?? throw new ArgumentNullException(nameof(settings));
 
-            if (string.IsNullOrEmpty(settings.ConnectionString))
+            if (string.IsNullOrEmpty(_settings.ConnectionString))
             {
                 _logger.LogError("Connection string is empty. MongoDB client is not initialized.");
                 return;
             }
 
-            _mongoClient = new MongoClient(settings.ConnectionString);
+            _mongoClient = new MongoClient(_settings.ConnectionString);
             var database = _mongoClient.GetDatabase(_settings.DatabaseName);
             _collection = database.GetCollection<BsonDocument>(_settings.CollectionName);
         }

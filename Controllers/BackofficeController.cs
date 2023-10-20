@@ -73,7 +73,6 @@ namespace MongoDB_Code.Controllers
             _logger.LogInformation("Entering Index method in BackofficeController.");
 
             var settings = _mongoDBServiceProvider?.GetCurrentSettings() ?? new MyDatabaseSettings();
-
             if (string.IsNullOrEmpty(settings.ConnectionString))
             {
                 _logger.LogWarning("Connection string is empty in BackofficeController Index method.");

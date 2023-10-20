@@ -1,65 +1,69 @@
-﻿using Microsoft.Extensions.Options;
-using MongoDB_Code.Models;
+﻿using MongoDB_Code.Models;
 using MongoDB_Code.Services;
 using MongoDB.Driver;
 using MongoDB.Bson;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 public class MongoDBServiceProvider
 {
     private MyDatabaseSettings? _settings;
-    private ILogger<MongoDBService> _logger;
-    private MongoDBService _mongoDBService;
+    private readonly ILogger<MongoDBService> _logger;
     private MongoClient? _mongoClient;
     private IMongoDatabase? _database;
-    private IMongoCollection<BsonDocument>? _collection;
 
-    public void Initialize()
-    {
-        if (string.IsNullOrEmpty(_settings?.ConnectionString))
-        {
-            _logger.LogError("Connection string is empty. MongoDB client is not initialized.");
-            return;
-        }
-        _mongoClient = new MongoClient(_settings.ConnectionString);
-        var database = _mongoClient.GetDatabase(_settings.DatabaseName);
-        _collection = database.GetCollection<BsonDocument>(_settings.CollectionName);
-    }
-
-    public MongoDBServiceProvider(IOptions<MyDatabaseSettings> settings, ILogger<MongoDBService> logger)
+    public MongoDBServiceProvider(ILogger<MongoDBService> logger)
     {
         _logger = logger ?? throw new ArgumentNullException(nameof(logger));
+    }
 
-        if (settings?.Value == null || string.IsNullOrEmpty(settings.Value.ConnectionString))
-        {
-            _logger.LogError("Connection string is empty. MongoDB client will not be initialized.");
-            _mongoClient = null;
-            _database = null;
-            _settings = new MyDatabaseSettings(); // Valor padrão
-        }
-        else
-        {
-            _mongoClient = new MongoClient(settings.Value.ConnectionString);
-            _database = _mongoClient.GetDatabase(settings.Value.DatabaseName);
-            _settings = settings.Value;
-        }
-
-        _mongoDBService = new MongoDBService(_settings, _logger);
+    public void Initialize(MyDatabaseSettings settings)
+    {
+        _settings = settings ?? throw new ArgumentNullException(nameof(settings));
+        _mongoClient = new MongoClient(_settings.ConnectionString);
+        _database = _mongoClient.GetDatabase(_settings.DatabaseName);
     }
 
     public void UpdateSettings(MyDatabaseSettings newSettings)
     {
-        _settings = newSettings.DeepCopy();
-        _mongoDBService = new MongoDBService(_settings, _logger);
+        _settings = newSettings.DeepCopy() ?? throw new ArgumentNullException(nameof(newSettings));
     }
 
-    public MongoDBService CreateService()
+    public MyDatabaseSettings? GetCurrentSettings()
     {
-        return _mongoDBService ?? throw new InvalidOperationException("MongoDBService is not initialized.");
-    }
+        if (_settings == null)
+        {
+            _logger.LogWarning("Settings are not initialized.");
+            return null; // Retorne null ou lance uma exceção, dependendo do comportamento desejado.
+        }
 
-    public MyDatabaseSettings GetCurrentSettings()
-    {
         _logger.LogInformation("Using connection string: {ConnectionString}", _settings.ConnectionString);
         return _settings.DeepCopy();
+    }
+
+    public async Task<List<BsonDocument>> RetrieveDataAsync()
+    {
+        if (_database == null || _settings == null)
+        {
+            throw new InvalidOperationException("MongoDBServiceProvider is not initialized.");
+        }
+
+        var collection = _database.GetCollection<BsonDocument>(_settings.CollectionName);
+        return await collection.Find(new BsonDocument()).ToListAsync();
+    }
+
+    public IMongoCollection<T> GetCollection<T>(string collectionName) where T : class
+    {
+        if (string.IsNullOrEmpty(collectionName))
+        {
+            throw new ArgumentException("Collection name cannot be null or empty.", nameof(collectionName));
+        }
+
+        if (_database == null)
+        {
+            throw new InvalidOperationException("MongoDBServiceProvider is not initialized.");
+        }
+
+        return _database.GetCollection<T>(collectionName);
     }
 }
