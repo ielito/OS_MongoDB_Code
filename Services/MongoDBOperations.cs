@@ -2,49 +2,50 @@
 using MongoDB_Code.Models;
 using MongoDB_Code.Services;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using Amazon.Runtime.Internal.Util;
 
 namespace MongoDB_Code.Operations
 {
     public class MongoDBOperations : IMongoDBOperations
     {
-        private MongoDBServiceProvider? _mongoDBServiceProvider;
+        private static readonly MongoDBServiceProvider _mongoDBServiceProviderSingleton;
         private readonly ILogger<MongoDBOperations> _logger;
 
-        // Adicionado um construtor público sem parâmetros
+        static MongoDBOperations()
+        {
+            var loggerFactory = new LoggerFactory();
+            var defaultSettings = new MyDatabaseSettings
+            {
+                ConnectionString = "",
+                DatabaseName = "",
+                CollectionName = ""
+            };
+            var options = Options.Create(defaultSettings);
+            _mongoDBServiceProviderSingleton = new MongoDBServiceProvider(options, new Logger<MongoDBService>(loggerFactory));
+        }
+
         public MongoDBOperations()
         {
-            // Este construtor não faz nada, mas é necessário para a OutSystems
-        }
-
-        public MongoDBOperations(MongoDBServiceProvider mongoDBServiceProvider, ILogger<MongoDBOperations> logger)
-        {
-            _mongoDBServiceProvider = mongoDBServiceProvider;
-            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
-        }
-
-        // Método setter para _mongoDBServiceProvider
-        public void SetMongoDBServiceProvider(MongoDBServiceProvider mongoDBServiceProvider)
-        {
-            _mongoDBServiceProvider = mongoDBServiceProvider;
+            _logger = new Logger<MongoDBOperations>(new LoggerFactory());
         }
 
         public void InitializeMongoDB()
         {
-            if (_mongoDBServiceProvider == null)
+            if (_mongoDBServiceProviderSingleton == null)
             {
-                _logger?.LogError("Failed to initialize MongoDB: MongoDBServiceProvider is not initialized."); // Adicionado verificação nula para _logger
+                _logger.LogError("Failed to initialize MongoDB: MongoDBServiceProvider is not initialized.");
                 throw new InvalidOperationException("MongoDBServiceProvider is not initialized.");
             }
 
             _logger.LogInformation("Initializing MongoDB...");
-            _mongoDBServiceProvider.Initialize();
+            _mongoDBServiceProviderSingleton.Initialize();
             _logger.LogInformation("MongoDB initialized successfully.");
         }
 
         public void SaveSettings(string connectionString, string databaseName, string collectionName)
         {
-            if (_mongoDBServiceProvider == null)
+            if (_mongoDBServiceProviderSingleton == null)
             {
                 throw new InvalidOperationException("MongoDBServiceProvider is not initialized.");
             }
@@ -56,17 +57,17 @@ namespace MongoDB_Code.Operations
                 CollectionName = collectionName
             };
 
-            _mongoDBServiceProvider.UpdateSettings(newSettings);
+            _mongoDBServiceProviderSingleton.UpdateSettings(newSettings);
         }
 
         public MongoDBSettings GetSettings()
         {
-            if (_mongoDBServiceProvider == null)
+            if (_mongoDBServiceProviderSingleton == null)
             {
                 throw new InvalidOperationException("MongoDBServiceProvider is not initialized.");
             }
 
-            var settings = _mongoDBServiceProvider.GetCurrentSettings();
+            var settings = _mongoDBServiceProviderSingleton.GetCurrentSettings();
             if (settings == null)
             {
                 throw new InvalidOperationException("Database settings have not been initialized.");

@@ -1,4 +1,5 @@
-﻿using OutSystems.ExternalLibraries.SDK;
+﻿using Amazon.Runtime.Documents;
+using OutSystems.ExternalLibraries.SDK;
 
 [OSInterface]
 public interface IMongoDBOperations
