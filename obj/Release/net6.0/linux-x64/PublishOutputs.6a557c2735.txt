@@ -10,6 +10,19 @@
 /Users/ielo/Library/Mobile Documents/com~apple~CloudDocs/Dev/Forge/MongoDB_Code/bin/Release/net6.0/linux-x64/publish/AWSSDK.Core.dll
 /Users/ielo/Library/Mobile Documents/com~apple~CloudDocs/Dev/Forge/MongoDB_Code/bin/Release/net6.0/linux-x64/publish/AWSSDK.SecurityToken.dll
 /Users/ielo/Library/Mobile Documents/com~apple~CloudDocs/Dev/Forge/MongoDB_Code/bin/Release/net6.0/linux-x64/publish/DnsClient.dll
+/Users/ielo/Library/Mobile Documents/com~apple~CloudDocs/Dev/Forge/MongoDB_Code/bin/Release/net6.0/linux-x64/publish/Microsoft.Extensions.Configuration.dll
+/Users/ielo/Library/Mobile Documents/com~apple~CloudDocs/Dev/Forge/MongoDB_Code/bin/Release/net6.0/linux-x64/publish/Microsoft.Extensions.Configuration.Abstractions.dll
+/Users/ielo/Library/Mobile Documents/com~apple~CloudDocs/Dev/Forge/MongoDB_Code/bin/Release/net6.0/linux-x64/publish/Microsoft.Extensions.Configuration.Binder.dll
+/Users/ielo/Library/Mobile Documents/com~apple~CloudDocs/Dev/Forge/MongoDB_Code/bin/Release/net6.0/linux-x64/publish/Microsoft.Extensions.DependencyInjection.dll
+/Users/ielo/Library/Mobile Documents/com~apple~CloudDocs/Dev/Forge/MongoDB_Code/bin/Release/net6.0/linux-x64/publish/Microsoft.Extensions.DependencyInjection.Abstractions.dll
+/Users/ielo/Library/Mobile Documents/com~apple~CloudDocs/Dev/Forge/MongoDB_Code/bin/Release/net6.0/linux-x64/publish/Microsoft.Extensions.Logging.dll
+/Users/ielo/Library/Mobile Documents/com~apple~CloudDocs/Dev/Forge/MongoDB_Code/bin/Release/net6.0/linux-x64/publish/Microsoft.Extensions.Logging.Abstractions.dll
+/Users/ielo/Library/Mobile Documents/com~apple~CloudDocs/Dev/Forge/MongoDB_Code/bin/Release/net6.0/linux-x64/publish/Microsoft.Extensions.Logging.Configuration.dll
+/Users/ielo/Library/Mobile Documents/com~apple~CloudDocs/Dev/Forge/MongoDB_Code/bin/Release/net6.0/linux-x64/publish/Microsoft.Extensions.Logging.Console.dll
+/Users/ielo/Library/Mobile Documents/com~apple~CloudDocs/Dev/Forge/MongoDB_Code/bin/Release/net6.0/linux-x64/publish/Microsoft.Extensions.Logging.Filter.dll
+/Users/ielo/Library/Mobile Documents/com~apple~CloudDocs/Dev/Forge/MongoDB_Code/bin/Release/net6.0/linux-x64/publish/Microsoft.Extensions.Options.dll
+/Users/ielo/Library/Mobile Documents/com~apple~CloudDocs/Dev/Forge/MongoDB_Code/bin/Release/net6.0/linux-x64/publish/Microsoft.Extensions.Options.ConfigurationExtensions.dll
+/Users/ielo/Library/Mobile Documents/com~apple~CloudDocs/Dev/Forge/MongoDB_Code/bin/Release/net6.0/linux-x64/publish/Microsoft.Extensions.Primitives.dll
 /Users/ielo/Library/Mobile Documents/com~apple~CloudDocs/Dev/Forge/MongoDB_Code/bin/Release/net6.0/linux-x64/publish/MongoDB.Bson.dll
 /Users/ielo/Library/Mobile Documents/com~apple~CloudDocs/Dev/Forge/MongoDB_Code/bin/Release/net6.0/linux-x64/publish/MongoDB.Driver.dll
 /Users/ielo/Library/Mobile Documents/com~apple~CloudDocs/Dev/Forge/MongoDB_Code/bin/Release/net6.0/linux-x64/publish/MongoDB.Driver.Core.dll
@@ -19,5 +32,7 @@
 /Users/ielo/Library/Mobile Documents/com~apple~CloudDocs/Dev/Forge/MongoDB_Code/bin/Release/net6.0/linux-x64/publish/OutSystems.ExternalLibraries.SDK.dll
 /Users/ielo/Library/Mobile Documents/com~apple~CloudDocs/Dev/Forge/MongoDB_Code/bin/Release/net6.0/linux-x64/publish/SharpCompress.dll
 /Users/ielo/Library/Mobile Documents/com~apple~CloudDocs/Dev/Forge/MongoDB_Code/bin/Release/net6.0/linux-x64/publish/Snappier.dll
+/Users/ielo/Library/Mobile Documents/com~apple~CloudDocs/Dev/Forge/MongoDB_Code/bin/Release/net6.0/linux-x64/publish/System.Text.Encodings.Web.dll
+/Users/ielo/Library/Mobile Documents/com~apple~CloudDocs/Dev/Forge/MongoDB_Code/bin/Release/net6.0/linux-x64/publish/System.Text.Json.dll
 /Users/ielo/Library/Mobile Documents/com~apple~CloudDocs/Dev/Forge/MongoDB_Code/bin/Release/net6.0/linux-x64/publish/ZstdSharp.dll
 /Users/ielo/Library/Mobile Documents/com~apple~CloudDocs/Dev/Forge/MongoDB_Code/bin/Release/net6.0/linux-x64/publish/libmongocrypt.so

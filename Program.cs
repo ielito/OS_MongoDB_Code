@@ -11,6 +11,10 @@ builder.Services.AddSingleton<MongoDBServiceProvider>();
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddDistributedMemoryCache();
 
+// Configurar logging
+builder.Logging.AddConsole();
+builder.Logging.SetMinimumLevel(LogLevel.Information);
+
 builder.Services.Configure<MyDatabaseSettings>(
     builder.Configuration.GetSection(nameof(MyDatabaseSettings)));
 

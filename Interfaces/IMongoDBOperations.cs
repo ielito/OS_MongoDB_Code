@@ -3,9 +3,9 @@
 [OSInterface]
 public interface IMongoDBOperations
 {
+    void InitializeMongoDB();
     void SaveSettings(string connectionString, string databaseName, string collectionName);
     MongoDBSettings GetSettings();
-    void InitializeMongoDB();
 }
 
 [OSStructure]
