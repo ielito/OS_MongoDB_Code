@@ -7,7 +7,7 @@ namespace MongoDB_Code.Controllers
 {
     public class BackofficeController : Controller
     {
-        private readonly MongoDBServiceProvider? _mongoDBServiceProvider;
+        private readonly MongoDBServiceProvider _mongoDBServiceProvider;
         private readonly ILogger<BackofficeController> _logger;
         private readonly CryptoService? _cryptoService;
         private readonly IConfiguration _configuration;
@@ -62,6 +62,11 @@ namespace MongoDB_Code.Controllers
             jsonObj["MyDatabaseSettings"]["DatabaseName"] = newSettings.DatabaseName;
             jsonObj["MyDatabaseSettings"]["CollectionName"] = newSettings.CollectionName;
 
+            if (jsonObj["MyDatabaseSettings"] == null)
+            {
+                throw new InvalidOperationException("MyDatabaseSettings not found in the configuration.");
+            }
+
             string output = Newtonsoft.Json.JsonConvert.SerializeObject(jsonObj, Newtonsoft.Json.Formatting.Indented);
             System.IO.File.WriteAllText(filePath, output);
 
@@ -72,8 +77,8 @@ namespace MongoDB_Code.Controllers
         {
             _logger.LogInformation("Entering Index method in BackofficeController.");
 
-            var settings = _mongoDBServiceProvider?.GetCurrentSettings() ?? new MyDatabaseSettings();
-            if (string.IsNullOrEmpty(settings.ConnectionString))
+            var settings = _mongoDBServiceProvider!.GetCurrentSettings();
+            if (settings == null || string.IsNullOrEmpty(settings.ConnectionString))
             {
                 _logger.LogWarning("Connection string is empty in BackofficeController Index method.");
                 ViewBag.ErrorMessage = "A string de conexão está vazia. Por favor, configure-a antes de prosseguir.";
@@ -89,5 +94,6 @@ namespace MongoDB_Code.Controllers
 
             return View(model);
         }
+
     }
 }

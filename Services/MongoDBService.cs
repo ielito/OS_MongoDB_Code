@@ -2,22 +2,13 @@
 using MongoDB.Driver;
 using MongoDB_Code.Models;
 using Newtonsoft.Json;
+using Microsoft.Extensions.Logging;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace MongoDB_Code.Services
 {
-
-    namespace MongoDB_Code.Services
-    {
-        public static class Extensions
-        {
-            public static T DeepCopy<T>(this T obj)
-            {
-                var serialized = JsonConvert.SerializeObject(obj);
-                return JsonConvert.DeserializeObject<T>(serialized);
-            }
-        }
-    }
-
     public class MongoDBService
     {
         private MyDatabaseSettings _settings;
@@ -41,6 +32,11 @@ namespace MongoDB_Code.Services
             _collection = database.GetCollection<BsonDocument>(_settings.CollectionName);
         }
 
+        public MyDatabaseSettings? GetCurrentSettings()
+        {
+            return _settings;
+        }
+
         public void UpdateConfiguration(MyDatabaseSettings settings)
         {
             if (settings == null)
@@ -53,11 +49,6 @@ namespace MongoDB_Code.Services
             var client = new MongoClient(_settings.ConnectionString);
             var database = client.GetDatabase(_settings.DatabaseName);
             _collection = database.GetCollection<BsonDocument>(_settings.CollectionName);
-        }
-
-        public MyDatabaseSettings GetCurrentSettings()
-        {
-            return _settings;
         }
 
         public async Task<List<BsonDocument>> RetrieveDataAsync(int limit = 1)

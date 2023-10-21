@@ -1,23 +1,26 @@
-﻿using MongoDB_Code.Models;
-using MongoDB_Code.Services;
-using MongoDB.Driver;
-using MongoDB.Bson;
+﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
+using MongoDB.Bson;
+using MongoDB.Driver;
+using MongoDB_Code.Models;
+using MongoDB_Code.Services;
 
-public class MongoDBServiceProvider
+namespace MongoDB_Code.Services // Adicionado um namespace
 {
-    private MyDatabaseSettings? _settings;
-    private readonly ILogger<MongoDBService> _logger;
-    private MongoClient? _mongoClient;
-    private IMongoDatabase? _database;
-
-    public MongoDBServiceProvider(ILogger<MongoDBService> logger)
+    public class MongoDBServiceProvider
     {
-        _logger = logger ?? throw new ArgumentNullException(nameof(logger));
-    }
+        private MyDatabaseSettings? _settings;
+        private readonly ILogger<MongoDBService> _logger;
+        private MongoClient? _mongoClient;
+        private IMongoDatabase? _database;
 
-    public void Initialize(MyDatabaseSettings settings)
+        public MongoDBServiceProvider(ILogger<MongoDBService> logger)
+        {
+            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
+        }
+        public void Initialize(MyDatabaseSettings settings)
     {
         _settings = settings ?? throw new ArgumentNullException(nameof(settings));
         _mongoClient = new MongoClient(_settings.ConnectionString);
@@ -26,8 +29,28 @@ public class MongoDBServiceProvider
 
     public void UpdateSettings(MyDatabaseSettings newSettings)
     {
-        _settings = newSettings.DeepCopy() ?? throw new ArgumentNullException(nameof(newSettings));
+        try
+        {
+            if (newSettings == null)
+            {
+                throw new ArgumentNullException(nameof(newSettings));
+            }
+
+            _settings = newSettings;
+
+            // Reconfigure the MongoDB client and database with the new settings
+            _mongoClient = new MongoClient(_settings.ConnectionString);
+            _database = _mongoClient.GetDatabase(_settings.DatabaseName);
+        }
+        catch (Exception ex)
+        {
+            // Log the exception
+            _logger.LogError($"Error updating MongoDB settings: {ex.Message}");
+            throw; // Re-throw the exception to ensure it's handled by the caller
+        }
     }
+
+
 
     public MyDatabaseSettings? GetCurrentSettings()
     {
@@ -66,4 +89,5 @@ public class MongoDBServiceProvider
 
         return _database.GetCollection<T>(collectionName);
     }
+}
 }

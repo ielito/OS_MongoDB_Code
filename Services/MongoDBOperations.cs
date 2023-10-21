@@ -6,15 +6,19 @@ using MongoDB.Bson;
 using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
-using Amazon.Runtime.Internal.Util;
-using DnsClient.Internal;
 
 namespace MongoDB_Code.Operations
 {
     public class MongoDBOperations : IMongoDBOperations
     {
-        private readonly MongoDBServiceProvider _mongoDBServiceProvider;
-        private readonly ILogger<MongoDBOperations> _logger;
+        private readonly MongoDBServiceProvider? _mongoDBServiceProvider;
+        private readonly ILogger<MongoDBOperations>? _logger;
+
+        public MongoDBOperations()
+        {
+            _logger = null;
+            _mongoDBServiceProvider = null;
+        }
 
         public MongoDBOperations(ILogger<MongoDBOperations> logger)
         {
@@ -31,8 +35,8 @@ namespace MongoDB_Code.Operations
                 DatabaseName = databaseName,
                 CollectionName = collectionName
             };
-            _mongoDBServiceProvider.Initialize(settings);
-            _logger.LogInformation("MongoDB initialized successfully.");
+            _mongoDBServiceProvider?.Initialize(settings);
+            _logger?.LogInformation("MongoDB initialized successfully.");
         }
 
         public void SaveSettings(string connectionString, string databaseName, string collectionName)
@@ -43,7 +47,7 @@ namespace MongoDB_Code.Operations
                 DatabaseName = databaseName,
                 CollectionName = collectionName
             };
-            _mongoDBServiceProvider.UpdateSettings(newSettings);
+            _mongoDBServiceProvider?.UpdateSettings(newSettings);
         }
 
         public MongoDBSettings GetSettings()
@@ -69,28 +73,27 @@ namespace MongoDB_Code.Operations
 
         public List<MongoDBRecord> GetAllRecordsFromCollection(string connectionString, string databaseName, string collectionName)
         {
-            // Criar uma nova instância do MongoDBServiceProvider com as configurações fornecidas
             var settings = new MyDatabaseSettings
             {
                 ConnectionString = connectionString,
                 DatabaseName = databaseName,
                 CollectionName = collectionName
             };
-            _mongoDBServiceProvider.Initialize(settings);
+            _mongoDBServiceProvider?.Initialize(settings);
 
             var records = new List<MongoDBRecord>();
 
-            // Obtenha a coleção do MongoDB
-            var collection = _mongoDBServiceProvider.GetCollection<BsonDocument>(collectionName);
+            var collection = _mongoDBServiceProvider?.GetCollection<BsonDocument>(collectionName);
 
-            // Consulte todos os registros da coleção
-            var documents = collection.Find(_ => true).ToList();
+            var documents = collection?.Find(_ => true).ToList();
 
-            // Converta cada documento BSON em uma string JSON e adicione à lista
-            foreach (var document in documents)
+            if (documents != null)
             {
-                var json = document.ToJson();
-                records.Add(new MongoDBRecord { Data = json });
+                foreach (var document in documents)
+                {
+                    var json = document.ToJson();
+                    records.Add(new MongoDBRecord { Data = json });
+                }
             }
 
             return records;
