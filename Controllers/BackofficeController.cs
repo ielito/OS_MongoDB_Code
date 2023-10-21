@@ -9,10 +9,10 @@ namespace MongoDB_Code.Controllers
     {
         private readonly MongoDBServiceProvider _mongoDBServiceProvider;
         private readonly ILogger<BackofficeController> _logger;
-        private readonly CryptoService? _cryptoService;
+        private readonly CryptoService _cryptoService;
         private readonly IConfiguration _configuration;
 
-        public BackofficeController(MongoDBServiceProvider? mongoDBServiceProvider, ILogger<BackofficeController> logger, CryptoService? cryptoService, IConfiguration configuration)
+        public BackofficeController(MongoDBServiceProvider mongoDBServiceProvider, ILogger<BackofficeController> logger, CryptoService cryptoService, IConfiguration configuration)
         {
             _mongoDBServiceProvider = mongoDBServiceProvider ?? throw new ArgumentNullException(nameof(mongoDBServiceProvider));
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
@@ -24,11 +24,6 @@ namespace MongoDB_Code.Controllers
         public IActionResult Save(BackofficeModel model)
         {
             _logger.LogInformation("Entering Save method in BackofficeController.");
-
-            if (_mongoDBServiceProvider == null)
-            {
-                throw new InvalidOperationException("MongoDBServiceProvider is not initialized.");
-            }
 
             if (ModelState.IsValid)
             {
@@ -77,7 +72,7 @@ namespace MongoDB_Code.Controllers
         {
             _logger.LogInformation("Entering Index method in BackofficeController.");
 
-            var settings = _mongoDBServiceProvider!.GetCurrentSettings();
+            var settings = _mongoDBServiceProvider.GetCurrentSettings();
             if (settings == null || string.IsNullOrEmpty(settings.ConnectionString))
             {
                 _logger.LogWarning("Connection string is empty in BackofficeController Index method.");
@@ -94,6 +89,5 @@ namespace MongoDB_Code.Controllers
 
             return View(model);
         }
-
     }
 }

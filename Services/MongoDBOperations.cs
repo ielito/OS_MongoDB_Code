@@ -6,6 +6,7 @@ using MongoDB.Bson;
 using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
+using DnsClient.Protocol;
 
 namespace MongoDB_Code.Operations
 {
@@ -73,30 +74,63 @@ namespace MongoDB_Code.Operations
 
         public List<MongoDBRecord> GetAllRecordsFromCollection(string connectionString, string databaseName, string collectionName)
         {
-            var settings = new MyDatabaseSettings
+            try
             {
-                ConnectionString = connectionString,
-                DatabaseName = databaseName,
-                CollectionName = collectionName
-            };
-            _mongoDBServiceProvider?.Initialize(settings);
+                LogInformation("Starting GetAllRecordsFromCollection.");
 
-            var records = new List<MongoDBRecord>();
+                // Inicializar o provedor de serviços MongoDB com as configurações fornecidas
+                var settings = new MyDatabaseSettings
+                {
+                    ConnectionString = connectionString,
+                    DatabaseName = databaseName,
+                    CollectionName = collectionName
+                };
 
-            var collection = _mongoDBServiceProvider?.GetCollection<BsonDocument>(collectionName);
+                if (_mongoDBServiceProvider == null)
+                {
+                    throw new InvalidOperationException("MongoDBServiceProvider is not initialized.");
+                }
 
-            var documents = collection?.Find(_ => true).ToList();
+                _mongoDBServiceProvider.Initialize(settings);
 
-            if (documents != null)
-            {
+                var records = new List<MongoDBRecord>();
+
+                var collection = _mongoDBServiceProvider.GetCollection<BsonDocument>(collectionName);
+
+                if (collection == null)
+                {
+                    throw new InvalidOperationException($"Unable to get collection: {collectionName}");
+                }
+
+                var documents = collection.Find(_ => true).ToList();
+
+                LogInformation($"Found {documents.Count} documents in collection: {collectionName}.");
+
                 foreach (var document in documents)
                 {
                     var json = document.ToJson();
                     records.Add(new MongoDBRecord { Data = json });
                 }
-            }
 
-            return records;
+                LogInformation("Finished GetAllRecordsFromCollection.");
+                return records;
+            }
+            catch (Exception ex)
+            {
+                LogError($"Error in GetAllRecordsFromCollection: {ex.Message}. StackTrace: {ex.StackTrace}");
+                throw;
+            }
         }
+
+        private void LogInformation(string message)
+        {
+            _logger?.LogInformation(message);
+        }
+
+        private void LogError(string message)
+        {
+            _logger?.LogError(message);
+        }
+
     }
 }
