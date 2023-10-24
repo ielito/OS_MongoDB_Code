@@ -10,6 +10,8 @@ builder.Services.AddControllersWithViews().AddSessionStateTempDataProvider();
 builder.Services.AddSingleton<MongoDBServiceProvider>();
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddDistributedMemoryCache();
+builder.Services.AddLogging();
+builder.Logging.AddConsole();
 
 // Configurar logging
 builder.Logging.AddConsole();

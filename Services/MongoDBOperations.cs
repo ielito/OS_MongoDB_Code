@@ -8,37 +8,43 @@ using System;
 using System.Collections.Generic;
 using DnsClient.Protocol;
 
-namespace MongoDB_Code.Operations
+public class MongoDBOperations : IMongoDBOperations
 {
-    public class MongoDBOperations : IMongoDBOperations
+    private readonly MongoDBServiceProvider? _mongoDBServiceProvider;
+    private readonly ILogger<MongoDBOperations>? _logger;
+
+    public MongoDBOperations()
     {
-        private readonly MongoDBServiceProvider? _mongoDBServiceProvider;
-        private readonly ILogger<MongoDBOperations>? _logger;
+        var loggerFactory = new LoggerFactory();
+        var logger = loggerFactory.CreateLogger<MongoDBService>();
+        _mongoDBServiceProvider = new MongoDBServiceProvider(logger);
+    }
 
-        public MongoDBOperations()
+    public MongoDBOperations(ILogger<MongoDBOperations> logger, MongoDBServiceProvider mongoDBServiceProvider)
+    {
+        _logger = logger;
+        _mongoDBServiceProvider = mongoDBServiceProvider;
+    }
+
+    public void InitializeMongoDB(string connectionString, string databaseName, string collectionName)
+    {
+        var settings = new MyDatabaseSettings
         {
-            _logger = null;
-            _mongoDBServiceProvider = null;
+            ConnectionString = connectionString,
+            DatabaseName = databaseName,
+            CollectionName = collectionName
+        };
+        if (_logger == null)
+        {
+            throw new ArgumentNullException(nameof(_logger), "Logger is not initialized.");
         }
-
-        public MongoDBOperations(ILogger<MongoDBOperations> logger)
-        {
-            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
-            ILogger<MongoDBService> mongoServiceLogger = new Logger<MongoDBService>(new LoggerFactory());
-            _mongoDBServiceProvider = new MongoDBServiceProvider(mongoServiceLogger);
-        }
-
-        public void InitializeMongoDB(string connectionString, string databaseName, string collectionName)
-        {
-            var settings = new MyDatabaseSettings
+        if (_mongoDBServiceProvider == null)
             {
-                ConnectionString = connectionString,
-                DatabaseName = databaseName,
-                CollectionName = collectionName
-            };
-            _mongoDBServiceProvider?.Initialize(settings);
-            _logger?.LogInformation("MongoDB initialized successfully.");
-        }
+                throw new ArgumentNullException(nameof(_mongoDBServiceProvider), "MongoDB is not initialized");
+            }
+        _mongoDBServiceProvider.Initialize(settings);
+        _logger.LogInformation("MongoDB initialized successfully.");
+    }
 
         public void SaveSettings(string connectionString, string databaseName, string collectionName)
         {
@@ -131,6 +137,5 @@ namespace MongoDB_Code.Operations
         {
             _logger?.LogError(message);
         }
-
-    }
 }
+ 

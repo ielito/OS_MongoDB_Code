@@ -7,7 +7,7 @@ using MongoDB.Driver;
 using MongoDB_Code.Models;
 using MongoDB_Code.Services;
 
-namespace MongoDB_Code.Services // Adicionado um namespace
+namespace MongoDB_Code.Services
 {
     public class MongoDBServiceProvider
     {
@@ -50,8 +50,6 @@ namespace MongoDB_Code.Services // Adicionado um namespace
         }
     }
 
-
-
     public MyDatabaseSettings? GetCurrentSettings()
     {
         if (_settings == null)
@@ -89,5 +87,11 @@ namespace MongoDB_Code.Services // Adicionado um namespace
 
         return _database.GetCollection<T>(collectionName);
     }
-}
+
+        public bool IsInitialized()
+        {
+            return _mongoClient != null; // Supondo que _mongoClient é a variável que você usa para manter a conexão com o MongoDB.
+        }
+
+    }
 }
