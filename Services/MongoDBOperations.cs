@@ -15,9 +15,6 @@ public class MongoDBOperations : IMongoDBOperations
 
     public MongoDBOperations()
     {
-        var loggerFactory = new LoggerFactory();
-        var logger = loggerFactory.CreateLogger<MongoDBService>();
-        _mongoDBServiceProvider = new MongoDBServiceProvider(logger);
     }
 
     public MongoDBOperations(ILogger<MongoDBOperations> logger, MongoDBServiceProvider mongoDBServiceProvider)
@@ -128,7 +125,7 @@ public class MongoDBOperations : IMongoDBOperations
             }
         }
 
-        private void LogInformation(string message)
+    private void LogInformation(string message)
         {
             _logger?.LogInformation(message);
         }

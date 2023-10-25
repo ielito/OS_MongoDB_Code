@@ -2,6 +2,8 @@
 using MongoDB_Code.Models;
 using MongoDB_Code.Services;
 using JsonConvert = Newtonsoft.Json.JsonConvert;
+using Newtonsoft.Json;
+
 
 namespace MongoDB_Code.Controllers
 {
@@ -51,22 +53,34 @@ namespace MongoDB_Code.Controllers
 
             string filePath = "appsettings.json";
             var json = System.IO.File.ReadAllText(filePath);
-            dynamic jsonObj = JsonConvert.DeserializeObject(json);
 
-            jsonObj["MyDatabaseSettings"]["ConnectionString"] = newSettings.ConnectionString;
-            jsonObj["MyDatabaseSettings"]["DatabaseName"] = newSettings.DatabaseName;
-            jsonObj["MyDatabaseSettings"]["CollectionName"] = newSettings.CollectionName;
+            var jsonObj = JsonConvert.DeserializeObject<Dictionary<string, object>>(json);
+            if (jsonObj == null)
+            {
+                throw new InvalidOperationException("Failed to deserialize the configuration.");
+            }
 
-            if (jsonObj["MyDatabaseSettings"] == null)
+            if (!jsonObj.ContainsKey("MyDatabaseSettings") || jsonObj["MyDatabaseSettings"] == null)
             {
                 throw new InvalidOperationException("MyDatabaseSettings not found in the configuration.");
             }
 
-            string output = Newtonsoft.Json.JsonConvert.SerializeObject(jsonObj, Newtonsoft.Json.Formatting.Indented);
+            var databaseSettings = jsonObj["MyDatabaseSettings"] as Dictionary<string, object>;
+            if (databaseSettings == null)
+            {
+                throw new InvalidOperationException("MyDatabaseSettings is not in the expected format.");
+            }
+
+            databaseSettings["ConnectionString"] = newSettings.ConnectionString;
+            databaseSettings["DatabaseName"] = newSettings.DatabaseName;
+            databaseSettings["CollectionName"] = newSettings.CollectionName;
+
+            string output = JsonConvert.SerializeObject(jsonObj, Formatting.Indented);
             System.IO.File.WriteAllText(filePath, output);
 
             _logger.LogInformation("Settings saved successfully in BackofficeController SaveSettings method.");
         }
+
 
         public IActionResult Index()
         {

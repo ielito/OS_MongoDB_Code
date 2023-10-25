@@ -1,19 +1,21 @@
 ﻿<Properties StartupConfiguration="{B03C2945-998A-4C13-BBED-10BF32014CC5}|https">
   <MonoDevelop.Ide.Workbench ActiveDocument="Interfaces/IMongoDBOperations.cs">
     <Files>
-      <File FileName="Interfaces/IMongoDBOperations.cs" Line="16" Column="2" />
-      <File FileName="Services/MongoDBService.cs" Line="1" Column="1" />
+      <File FileName="Services/MongoDBServiceProvider.cs" Line="94" Column="10" />
+      <File FileName="Program.cs" Line="28" Column="37" />
+      <File FileName="Interfaces/IMongoDBOperations.cs" Line="11" Column="2" />
+      <File FileName="Services/MongoDBOperations.cs" Line="18" Column="6" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="MongoDB_Code">
-            <Node name="MongoDB_Code" expanded="True">
-              <Node name="Controllers" expanded="True" />
-              <Node name="Interfaces" expanded="True">
+            <Node name="MongoDB_Code">
+              <Node name="Interfaces">
                 <Node name="IMongoDBOperations.cs" selected="True" />
               </Node>
               <Node name="Models" expanded="True" />
+              <Node name="Properties" expanded="True" />
               <Node name="Services" expanded="True" />
             </Node>
           </Node>
@@ -21,11 +23,11 @@
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Release" />
   <MonoDevelop.Ide.ItemProperties.MongoDB__Code PreferredExecutionTarget="/Applications/Google Chrome.app" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Release" />
-  <MultiItemStartupConfigurations />
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
 </Properties>
